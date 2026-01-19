@@ -29,8 +29,10 @@ This TypeRacer application is optimized for maximum performance with:
 - **Algorithm:** Brotli (better than gzip)
 - **Files:** `.js`, `.css`, `.html`, `.svg`
 - **Threshold:** 8KB
+- **Compression Level:** 11 (maximum)
 - **Compression Ratio:** ~75-85% size reduction (better than gzip)
 - **Browser Support:** Modern browsers (Chrome, Firefox, Edge, Safari)
+- **Implementation:** Native Node.js `brotliCompress` via `compression-webpack-plugin`
 
 ### **How It Works:**
 1. Webpack generates `.gz` and `.br` files during build

@@ -5,7 +5,6 @@ const webpack = require("webpack");
 const TerserWebpackPlugin = require("terser-webpack-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
-const BrotliPlugin = require("brotli-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
 module.exports = function(_env, argv) {
@@ -110,14 +109,18 @@ module.exports = function(_env, argv) {
             level: 9
           }
         }),
-      // Brotli compression (better than gzip)
+      // Brotli compression (better than gzip) - using native Node.js zlib
       isProduction &&
         process.env.ENABLE_COMPRESSION !== "false" &&
-        new BrotliPlugin({
-          asset: "[path].br[query]",
+        new CompressionPlugin({
+          filename: "[path].br[query]",
+          algorithm: "brotliCompress",
           test: /\.(js|css|html|svg)$/,
           threshold: 8192,
-          minRatio: 0.8
+          minRatio: 0.8,
+          compressionOptions: {
+            level: 11
+          }
         }),
       // Bundle analyzer (only when ANALYZE=true)
       shouldAnalyze &&

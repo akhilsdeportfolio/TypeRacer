@@ -100,7 +100,7 @@ module.exports = function(_env, argv) {
       isProduction &&
         process.env.ENABLE_COMPRESSION !== "false" &&
         new CompressionPlugin({
-          filename: "[path].gz[query]",
+          filename: "[path][base].gz",
           algorithm: "gzip",
           test: /\.(js|css|html|svg)$/,
           threshold: 8192,
@@ -113,7 +113,7 @@ module.exports = function(_env, argv) {
       isProduction &&
         process.env.ENABLE_COMPRESSION !== "false" &&
         new CompressionPlugin({
-          filename: "[path].br[query]",
+          filename: "[path][base].br",
           algorithm: "brotliCompress",
           test: /\.(js|css|html|svg)$/,
           threshold: 8192,

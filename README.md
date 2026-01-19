@@ -82,6 +82,23 @@ The application will open at `http://localhost:8080/`
 yarn build
 ```
 
+### Deploy to Firebase Hosting
+
+```bash
+# Install Firebase CLI globally
+npm install -g firebase-tools
+
+# Login to Firebase
+firebase login
+
+# Deploy to Firebase Hosting
+firebase deploy --only hosting
+```
+
+**Automatic Deployment:** This project is configured with GitHub Actions for automatic deployment to Firebase Hosting on every push to `main` branch.
+
+See [FIREBASE_SETUP.md](./FIREBASE_SETUP.md) for complete setup instructions.
+
 ---
 
 ## 🏗️ Architecture
@@ -132,7 +149,28 @@ src/
 
 ## 📖 Documentation
 
-See [WORLD_CLASS_FEATURES.md](./WORLD_CLASS_FEATURES.md) for complete feature documentation.
+- [WORLD_CLASS_FEATURES.md](./WORLD_CLASS_FEATURES.md) - Complete feature documentation
+- [FIREBASE_SETUP.md](./FIREBASE_SETUP.md) - Firebase hosting and auto-deployment setup
+
+---
+
+## 🚀 Deployment
+
+### Firebase Hosting + GitHub Actions
+
+This project includes automatic deployment to Firebase Hosting:
+
+- **On Push to Main:** Automatically deploys to production
+- **On Pull Request:** Creates preview deployment with unique URL
+- **Zero Configuration:** Just set up Firebase project and GitHub secrets
+
+**Setup Steps:**
+1. Create Firebase project
+2. Add `FIREBASE_SERVICE_ACCOUNT` secret to GitHub
+3. Update project ID in `.firebaserc` and workflow files
+4. Push to `main` branch
+
+See [FIREBASE_SETUP.md](./FIREBASE_SETUP.md) for detailed instructions.
 
 ---
 

@@ -1,0 +1,127 @@
+/* Typing History Styles */
+
+.typing-history {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+/* Filters */
+.typing-history__filters {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.history-select {
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: white;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.history-select:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.sort-toggle {
+  padding: 0.5rem 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sort-toggle:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* List */
+.typing-history__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.typing-history__empty {
+  text-align: center;
+  padding: 2rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* History Item */
+.history-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  transition: all 0.2s;
+}
+
+.history-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.history-item__icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.history-item__info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.history-item__game {
+  font-weight: 600;
+  color: white;
+  text-transform: capitalize;
+}
+
+.history-item__date {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.history-item__stats {
+  display: flex;
+  gap: 1rem;
+}
+
+.history-stat {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.history-stat strong {
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .history-item {
+    flex-wrap: wrap;
+  }
+  
+  .history-item__stats {
+    width: 100%;
+    justify-content: space-around;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+

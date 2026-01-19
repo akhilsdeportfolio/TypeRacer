@@ -27,6 +27,8 @@ const LessonsPage = lazy(() => import('../pages/LessonsPage'));
 const StatsPage = lazy(() => import('../pages/StatsPage'));
 const SettingsPage = lazy(() => import('../pages/SettingsPage'));
 const AchievementsPage = lazy(() => import('../pages/AchievementsPage'));
+const CountdownPage = lazy(() => import('../pages/CountdownPage'));
+const FallingWordsPage = lazy(() => import('../pages/FallingWordsPage'));
 
 // Page wrapper with suspense
 const PageWrapper = ({ children }) => (
@@ -59,6 +61,8 @@ export const routes = [
       { path: 'stats', element: <PageWrapper><StatsPage /></PageWrapper> },
       { path: 'settings', element: <PageWrapper><SettingsPage /></PageWrapper> },
       { path: 'achievements', element: <PageWrapper><AchievementsPage /></PageWrapper> },
+      { path: 'countdown', element: <PageWrapper><CountdownPage /></PageWrapper> },
+      { path: 'falling-words', element: <PageWrapper><FallingWordsPage /></PageWrapper> },
       { path: '*', element: <Navigate to="/" replace /> },
     ],
   },
@@ -166,6 +170,24 @@ export const GAMES = [
     description: 'Practice with your own text',
     color: '#64748b',
     difficulty: 'Custom',
+  },
+  {
+    id: 'countdown',
+    name: 'Countdown',
+    path: '/countdown',
+    icon: '⏱️',
+    description: 'Type as many words as possible before time runs out',
+    color: '#dc2626',
+    difficulty: 'Medium',
+  },
+  {
+    id: 'falling-words',
+    name: 'Falling Words',
+    path: '/falling-words',
+    icon: '🌧️',
+    description: 'Type words before they fall off the screen',
+    color: '#0891b2',
+    difficulty: 'Hard',
   },
 ];
 

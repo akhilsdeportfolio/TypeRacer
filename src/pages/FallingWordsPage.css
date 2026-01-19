@@ -1,0 +1,142 @@
+/* Falling Words Page Styles */
+
+.falling-game {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.falling-stats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.falling-area {
+  position: relative;
+  height: 400px;
+  background: linear-gradient(to bottom, 
+    rgba(102, 126, 234, 0.1) 0%,
+    rgba(102, 126, 234, 0.05) 100%
+  );
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.falling-word {
+  position: absolute;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  transform: translateX(-50%);
+  animation: pulse 1s ease-in-out infinite;
+  white-space: nowrap;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 10px rgba(102, 126, 234, 0.5); }
+  50% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.8); }
+}
+
+.ground-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, 
+    transparent,
+    rgba(239, 68, 68, 0.8),
+    transparent
+  );
+}
+
+.stat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+}
+
+/* Countdown game styles */
+.countdown-game {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.countdown-stats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.word-display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  min-height: 80px;
+}
+
+.word {
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.1rem;
+}
+
+.word--current {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  font-weight: 600;
+  transform: scale(1.1);
+}
+
+.game-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 1rem 1.5rem;
+  font-size: 1.25rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  color: white;
+  text-align: center;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.game-input:focus {
+  border-color: #667eea;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.game-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+

@@ -207,6 +207,13 @@ This opens an interactive visualization showing:
 - Scripts in `package.json` include `NODE_OPTIONS` for local compatibility
 - Node.js 20+ required for `webpack-bundle-analyzer@5.x`
 
+### **Compression Strategy:**
+- **Local Builds:** Webpack plugins handle compression during build
+- **GitHub Actions:** Native `gzip` and `brotli` commands compress after build
+  - Avoids ES module compatibility issues with `compression-webpack-plugin` dependencies
+  - Uses system-level compression tools (faster and more reliable)
+  - Same compression levels: gzip -9, brotli -9
+
 ---
 
 ## 📝 Best Practices Implemented

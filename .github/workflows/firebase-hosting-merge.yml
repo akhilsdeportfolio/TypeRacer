@@ -44,9 +44,18 @@ jobs:
         run: yarn install --immutable
 
       - name: Build production bundle
-        run: yarn build:prod
+        run: ENABLE_COMPRESSION=false yarn build:prod
         env:
           NODE_ENV: production
+
+      - name: Compress assets with gzip and brotli
+        run: |
+          echo "🗜️ Compressing assets..."
+          # Gzip compression
+          find dist -type f \( -name "*.js" -o -name "*.css" -o -name "*.html" -o -name "*.svg" \) -size +8k -exec gzip -9 -k {} \;
+          # Brotli compression
+          find dist -type f \( -name "*.js" -o -name "*.css" -o -name "*.html" -o -name "*.svg" \) -size +8k -exec brotli -9 -k {} \;
+          echo "✅ Compression complete"
 
       - name: Display bundle size
         run: |

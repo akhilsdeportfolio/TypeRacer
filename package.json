@@ -24,6 +24,9 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0"
   },
+  "resolutions": {
+    "get-intrinsic": "1.2.4"
+  },
   "devDependencies": {
     "@babel/core": "^7.6.0",
     "@babel/plugin-proposal-class-properties": "^7.5.5",

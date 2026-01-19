@@ -4,13 +4,18 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 const TerserWebpackPlugin = require("terser-webpack-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const CompressionPlugin = require("compression-webpack-plugin");
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+
+// Lazy load optional plugins to avoid ES module issues in CI
+const shouldCompress = process.env.ENABLE_COMPRESSION !== "false";
+const shouldAnalyze = process.env.ANALYZE === "true";
+
+// Only require these if needed (avoids loading problematic dependencies in CI)
+const CompressionPlugin = shouldCompress ? require("compression-webpack-plugin") : null;
+const BundleAnalyzerPlugin = shouldAnalyze ? require("webpack-bundle-analyzer").BundleAnalyzerPlugin : null;
 
 module.exports = function(_env, argv) {
   const isProduction = argv.mode === "production";
   const isDevelopment = !isProduction;
-  const shouldAnalyze = process.env.ANALYZE === "true";
 
   return {
     devtool: isDevelopment && "cheap-module-source-map",
@@ -96,9 +101,9 @@ module.exports = function(_env, argv) {
           isProduction ? "production" : "development"
         )
       }),
-      // Gzip compression
+      // Gzip compression (only if CompressionPlugin is loaded)
       isProduction &&
-        process.env.ENABLE_COMPRESSION !== "false" &&
+        CompressionPlugin &&
         new CompressionPlugin({
           filename: "[path][base].gz",
           algorithm: "gzip",
@@ -111,7 +116,7 @@ module.exports = function(_env, argv) {
         }),
       // Brotli compression (better than gzip) - using native Node.js zlib
       isProduction &&
-        process.env.ENABLE_COMPRESSION !== "false" &&
+        CompressionPlugin &&
         new CompressionPlugin({
           filename: "[path][base].br",
           algorithm: "brotliCompress",
@@ -122,8 +127,8 @@ module.exports = function(_env, argv) {
             level: 11
           }
         }),
-      // Bundle analyzer (only when ANALYZE=true)
-      shouldAnalyze &&
+      // Bundle analyzer (only when ANALYZE=true and BundleAnalyzerPlugin is loaded)
+      BundleAnalyzerPlugin &&
         new BundleAnalyzerPlugin({
           analyzerMode: "static",
           reportFilename: "bundle-report.html",

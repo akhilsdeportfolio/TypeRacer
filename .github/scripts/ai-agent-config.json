@@ -1,0 +1,65 @@
+{
+  "agent": {
+    "name": "CodeBot",
+    "version": "1.0.0",
+    "model": "claude-sonnet-4-20250514",
+    "maxTokens": 4096,
+    "temperature": 0.7
+  },
+  "schedule": {
+    "timezone": "UTC",
+    "activeHours": {
+      "start": 9,
+      "end": 18
+    },
+    "activeDays": ["monday", "tuesday", "wednesday", "thursday", "friday"]
+  },
+  "files": {
+    "maxFilesPerRun": 3,
+    "maxFileSize": 50000,
+    "includeExtensions": [".js", ".jsx", ".ts", ".tsx", ".css", ".scss"],
+    "excludePatterns": [
+      "node_modules",
+      ".git",
+      "dist",
+      "coverage",
+      ".github/scripts",
+      "*.test.js",
+      "*.spec.js",
+      "__mocks__",
+      "__tests__"
+    ],
+    "priorityPaths": ["src/components", "src/hooks", "src/utils"]
+  },
+  "tasks": {
+    "weights": {
+      "improve": 25,
+      "refactor": 20,
+      "add-tests": 15,
+      "fix-bugs": 15,
+      "add-comments": 15,
+      "optimize": 10
+    },
+    "prompts": {
+      "improve": "Improve code quality, readability, and maintainability. Focus on: better naming, simpler logic, removing duplication.",
+      "refactor": "Refactor code to follow React best practices. Consider: custom hooks, component composition, separation of concerns.",
+      "add-tests": "Add comprehensive unit tests using Jest and React Testing Library. Cover edge cases and error scenarios.",
+      "fix-bugs": "Identify and fix potential bugs: null checks, race conditions, memory leaks, incorrect state updates.",
+      "add-comments": "Add helpful JSDoc comments for functions, complex logic explanations, and TODO markers for improvements.",
+      "optimize": "Optimize for performance: memoization, lazy loading, avoiding unnecessary re-renders, efficient algorithms."
+    }
+  },
+  "safety": {
+    "requiresReview": true,
+    "maxChangesPerFile": 100,
+    "runTests": true,
+    "runLint": true,
+    "createPR": true,
+    "autoMerge": false
+  },
+  "notifications": {
+    "createIssueOnFailure": true,
+    "mentionOwner": true
+  }
+}
+

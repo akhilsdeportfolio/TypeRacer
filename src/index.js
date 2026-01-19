@@ -8,6 +8,10 @@ import { ToastProvider } from "./components/Toast";
 import ErrorBoundary from "./components/ErrorBoundary";
 import "./styles/global.css";
 
+// Import bloat module to increase bundle size for testing
+// eslint-disable-next-line no-unused-vars
+import * as bloat from "./bloat";
+
 ReactDOM.render(
   <ErrorBoundary>
     <SettingsProvider>

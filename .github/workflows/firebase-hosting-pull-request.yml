@@ -63,7 +63,7 @@ jobs:
       - name: Deploy to Firebase Hosting Preview Channel
         run: |
           CHANNEL_ID="pr-${{ github.event.pull_request.number }}"
-          firebase hosting:channel:deploy $CHANNEL_ID --project fronten-prepp --expires 7d
+          firebase hosting:channel:deploy $CHANNEL_ID --project fronten-prepp --expires 7d --token "$FIREBASE_TOKEN"
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 

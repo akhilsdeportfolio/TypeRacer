@@ -1,0 +1,152 @@
+# Auto-Merge Agent - Merges PRs created by the AI agents
+# Runs frequently to keep the merge queue moving
+
+name: 🔀 Auto-Merge Agent
+
+on:
+  schedule:
+    # Run every 5 minutes, 24/7
+    - cron: "*/5 * * * *"
+  workflow_dispatch: # Allow manual triggering
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🔍 Find and Merge AI PRs
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            
+            console.log('🔍 Looking for AI-created PRs to merge...');
+            
+            // Get all open PRs
+            const { data: pulls } = await github.rest.pulls.list({
+              owner,
+              repo,
+              state: 'open',
+              sort: 'created',
+              direction: 'asc' // Oldest first
+            });
+            
+            console.log(`Found ${pulls.length} open PRs`);
+            
+            // Filter for AI-created PRs (by github-actions bot)
+            const aiPRs = pulls.filter(pr => 
+              pr.user.login === 'github-actions[bot]' &&
+              (pr.title.includes('🤖') || pr.title.includes('AI') || pr.title.includes('Augment'))
+            );
+            
+            console.log(`Found ${aiPRs.length} AI-created PRs`);
+            
+            if (aiPRs.length === 0) {
+              console.log('✅ No AI PRs to merge');
+              return;
+            }
+            
+            // Process each AI PR
+            for (const pr of aiPRs) {
+              console.log(`\n📋 Processing PR #${pr.number}: ${pr.title}`);
+              
+              try {
+                // Check if PR is mergeable
+                const { data: prDetails } = await github.rest.pulls.get({
+                  owner,
+                  repo,
+                  pull_number: pr.number
+                });
+                
+                if (prDetails.mergeable === false) {
+                  console.log(`⚠️ PR #${pr.number} has conflicts, skipping`);
+                  continue;
+                }
+                
+                if (prDetails.mergeable === null) {
+                  console.log(`⏳ PR #${pr.number} mergeability unknown, will retry later`);
+                  continue;
+                }
+                
+                // Check CI status
+                const { data: checks } = await github.rest.checks.listForRef({
+                  owner,
+                  repo,
+                  ref: pr.head.sha
+                });
+                
+                const failedChecks = checks.check_runs.filter(
+                  check => check.conclusion === 'failure' || check.conclusion === 'cancelled'
+                );
+                
+                const pendingChecks = checks.check_runs.filter(
+                  check => check.status === 'in_progress' || check.status === 'queued'
+                );
+                
+                if (failedChecks.length > 0) {
+                  console.log(`❌ PR #${pr.number} has ${failedChecks.length} failed checks, closing PR`);
+                  
+                  // Close the PR with a comment
+                  await github.rest.issues.createComment({
+                    owner,
+                    repo,
+                    issue_number: pr.number,
+                    body: '❌ **Auto-closed**: This PR failed CI checks and cannot be merged.\n\nFailed checks:\n' + 
+                          failedChecks.map(c => `- ${c.name}: ${c.conclusion}`).join('\n')
+                  });
+                  
+                  await github.rest.pulls.update({
+                    owner,
+                    repo,
+                    pull_number: pr.number,
+                    state: 'closed'
+                  });
+                  continue;
+                }
+                
+                if (pendingChecks.length > 0) {
+                  console.log(`⏳ PR #${pr.number} has ${pendingChecks.length} pending checks, will retry later`);
+                  continue;
+                }
+                
+                // All checks passed, merge the PR!
+                console.log(`✅ Merging PR #${pr.number}...`);
+                
+                await github.rest.pulls.merge({
+                  owner,
+                  repo,
+                  pull_number: pr.number,
+                  merge_method: 'squash',
+                  commit_title: `${pr.title} (#${pr.number})`
+                });
+                
+                console.log(`🎉 Successfully merged PR #${pr.number}`);
+                
+                // Delete the branch
+                try {
+                  await github.rest.git.deleteRef({
+                    owner,
+                    repo,
+                    ref: `heads/${pr.head.ref}`
+                  });
+                  console.log(`🗑️ Deleted branch: ${pr.head.ref}`);
+                } catch (e) {
+                  console.log(`⚠️ Could not delete branch: ${e.message}`);
+                }
+                
+                // Only merge one PR per run to avoid conflicts
+                console.log('⏸️ Stopping after one merge to let CI run on main');
+                break;
+                
+              } catch (error) {
+                console.log(`❌ Error processing PR #${pr.number}: ${error.message}`);
+              }
+            }
+

@@ -19,7 +19,13 @@ jobs:
   auto-merge:
     runs-on: ubuntu-latest
     steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: 🔍 Find and Merge AI PRs
+        id: merge
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -158,7 +164,7 @@ jobs:
       - name: 📝 Log Activity
         if: always()
         run: |
-          echo "[$(date -u +%Y-%m-%dT%H:%M:%SZ)] [AUTO-MERGE] [RUN] Checked PRs, merged: ${{ steps.*.outputs.merged_pr || 'none' }}" >> .github/agent-logs/activity.log
+          echo "[$(date -u +%Y-%m-%dT%H:%M:%SZ)] [AUTO-MERGE] [RUN] Checked PRs, count: ${{ steps.merge.outputs.ai_prs_count || '0' }}" >> .github/agent-logs/activity.log
 
           # Update stats
           node -e "

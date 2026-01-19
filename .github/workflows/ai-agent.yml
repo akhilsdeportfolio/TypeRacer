@@ -150,3 +150,28 @@ jobs:
             augment
           reviewers: ${{ github.repository_owner }}
 
+      - name: 📝 Log Activity
+        if: always()
+        run: |
+          TASK="${{ steps.auggie.outputs.task_type || 'unknown' }}"
+          CHANGES="${{ steps.auggie.outputs.has_changes || 'false' }}"
+          echo "[$(date -u +%Y-%m-%dT%H:%M:%SZ)] [AI-AGENT] [RUN] Task: $TASK, Changes: $CHANGES" >> .github/agent-logs/activity.log
+
+          # Update stats
+          node -e "
+            const fs = require('fs');
+            const stats = JSON.parse(fs.readFileSync('.github/agent-logs/stats.json'));
+            stats.agents.aiAgent.runs++;
+            stats.agents.aiAgent.lastRun = new Date().toISOString();
+            stats.totalRuns++;
+            if ('$CHANGES' === 'true') stats.prsCreated++;
+            stats.lastActivity = new Date().toISOString();
+            fs.writeFileSync('.github/agent-logs/stats.json', JSON.stringify(stats, null, 2));
+          "
+
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git pull --rebase || true
+          git add .github/agent-logs/ || true
+          git diff --staged --quiet || git commit -m "📊 Update agent logs [skip ci]"
+          git push || true

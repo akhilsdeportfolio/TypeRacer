@@ -1,0 +1,199 @@
+# Agent Logger - Continuous logging system for all AI agents
+# Maintains a live log of all agent activity
+
+name: 📊 Agent Activity Logger
+
+on:
+  schedule:
+    # Run every 2 minutes to update logs
+    - cron: "*/2 * * * *"
+  workflow_dispatch:
+  workflow_run:
+    workflows: 
+      - "🤖 Augment AI Agent"
+      - "🔬 Code Analyzer Agent"
+      - "🎯 Agent Coordinator"
+      - "🔀 Auto-Merge Agent"
+      - "🤖 Continuous Improvement Agent"
+    types: [completed]
+
+permissions:
+  contents: write
+  issues: write
+  actions: read
+  pull-requests: read
+
+jobs:
+  log-activity:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛎️ Checkout
+        uses: actions/checkout@v4
+
+      - name: 📊 Aggregate Agent Logs
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            
+            console.log('📊 Aggregating agent activity...');
+            
+            // Get recent workflow runs
+            const { data: runs } = await github.rest.actions.listWorkflowRunsForRepo({
+              owner, repo,
+              per_page: 50,
+              created: `>${new Date(Date.now() - 24*60*60*1000).toISOString()}`
+            });
+            
+            // Get open PRs
+            const { data: pulls } = await github.rest.pulls.list({
+              owner, repo, state: 'open', per_page: 20
+            });
+            
+            // Get recent closed PRs (merged or closed)
+            const { data: closedPulls } = await github.rest.pulls.list({
+              owner, repo, state: 'closed', per_page: 20,
+              sort: 'updated', direction: 'desc'
+            });
+            
+            // Get analysis issues
+            const { data: analysisIssues } = await github.rest.issues.listForRepo({
+              owner, repo, state: 'all', labels: 'ai-analysis', per_page: 10
+            });
+            
+            // Build activity log
+            const agentWorkflows = [
+              '🤖 Augment AI Agent',
+              '🔬 Code Analyzer Agent', 
+              '🎯 Agent Coordinator',
+              '🔀 Auto-Merge Agent',
+              '🤖 Continuous Improvement Agent'
+            ];
+            
+            const agentRuns = runs.workflow_runs.filter(r => 
+              agentWorkflows.some(w => r.name.includes(w.replace(/[🤖🔬🎯🔀📊]/g, '').trim()) || r.name === w)
+            );
+            
+            // Calculate stats
+            const last24h = agentRuns.length;
+            const successful = agentRuns.filter(r => r.conclusion === 'success').length;
+            const failed = agentRuns.filter(r => r.conclusion === 'failure').length;
+            const aiPRs = pulls.filter(pr => pr.user.login === 'github-actions[bot]');
+            const mergedToday = closedPulls.filter(pr => 
+              pr.merged_at && 
+              new Date(pr.merged_at) > new Date(Date.now() - 24*60*60*1000) &&
+              pr.user.login === 'github-actions[bot]'
+            );
+            
+            // Format recent activity
+            const recentActivity = agentRuns.slice(0, 20).map(run => {
+              const emoji = run.conclusion === 'success' ? '✅' : 
+                           run.conclusion === 'failure' ? '❌' : 
+                           run.status === 'in_progress' ? '🔄' : '⏳';
+              const time = new Date(run.created_at).toISOString().replace('T', ' ').slice(0, 19);
+              return `| ${time} | ${emoji} | ${run.name} | ${run.conclusion || run.status} | [#${run.run_number}](${run.html_url}) |`;
+            }).join('\n');
+            
+            // Format PR activity
+            const prActivity = [...aiPRs, ...mergedToday.slice(0, 5)].slice(0, 10).map(pr => {
+              const status = pr.merged_at ? '🎉 Merged' : pr.state === 'open' ? '🔄 Open' : '❌ Closed';
+              return `| [#${pr.number}](${pr.html_url}) | ${pr.title.slice(0, 50)} | ${status} |`;
+            }).join('\n');
+            
+            // Build the log content
+            const logContent = `## 📊 AI Agent Activity Dashboard
+
+**Last Updated:** ${new Date().toISOString()}
+**Monitoring Period:** Last 24 hours
+
+---
+
+### 📈 Statistics
+
+| Metric | Value |
+|--------|-------|
+| 🔄 Total Agent Runs (24h) | ${last24h} |
+| ✅ Successful | ${successful} |
+| ❌ Failed | ${failed} |
+| 📝 Open AI PRs | ${aiPRs.length} |
+| 🎉 PRs Merged (24h) | ${mergedToday.length} |
+| 📋 Analysis Issues | ${analysisIssues.filter(i => i.state === 'open').length} open |
+
+---
+
+### 🕐 Recent Agent Activity
+
+| Time (UTC) | Status | Agent | Result | Link |
+|------------|--------|-------|--------|------|
+${recentActivity || '| No recent activity | | | | |'}
+
+---
+
+### 📝 PR Activity
+
+| PR | Title | Status |
+|----|-------|--------|
+${prActivity || '| No PRs | | |'}
+
+---
+
+### 🔬 Analysis Queue
+
+${analysisIssues.filter(i => i.state === 'open').slice(0, 5).map(i => 
+  `- [#${i.number}](${i.html_url}): ${i.title}`
+).join('\n') || '- Queue empty'}
+
+---
+
+### 🤖 Agent Status
+
+| Agent | Last Run | Status |
+|-------|----------|--------|
+${agentWorkflows.map(name => {
+  const lastRun = agentRuns.find(r => r.name === name || r.name.includes(name.replace(/[🤖🔬🎯🔀📊]/g, '').trim()));
+  if (lastRun) {
+    const emoji = lastRun.conclusion === 'success' ? '🟢' : lastRun.conclusion === 'failure' ? '🔴' : '🟡';
+    return `| ${name} | ${new Date(lastRun.created_at).toISOString().slice(0, 19)} | ${emoji} ${lastRun.conclusion || lastRun.status} |`;
+  }
+  return `| ${name} | Never | ⚪ Unknown |`;
+}).join('\n')}
+
+---
+
+*Auto-updated every 2 minutes by Agent Logger*
+*View live: [Actions Tab](https://github.com/${owner}/${repo}/actions)*`;
+
+            // Find or create the log issue
+            const { data: logIssues } = await github.rest.issues.listForRepo({
+              owner, repo, state: 'open', labels: 'agent-logs', per_page: 1
+            });
+            
+            if (logIssues.length > 0) {
+              await github.rest.issues.update({
+                owner, repo,
+                issue_number: logIssues[0].number,
+                body: logContent
+              });
+              console.log(`Updated log issue #${logIssues[0].number}`);
+            } else {
+              const { data: newIssue } = await github.rest.issues.create({
+                owner, repo,
+                title: '📊 AI Agent Activity Dashboard',
+                body: logContent,
+                labels: ['agent-logs', 'automated', 'pinned']
+              });
+              
+              // Pin the issue
+              await github.rest.issues.update({
+                owner, repo,
+                issue_number: newIssue.number,
+                state: 'open'
+              });
+              
+              console.log(`Created log issue #${newIssue.number}`);
+            }
+            
+            console.log('📊 Logging complete');
+

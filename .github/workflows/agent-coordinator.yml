@@ -169,3 +169,25 @@ jobs:
             });
             console.log('🚀 Triggered AI Agent workflow');
 
+      - name: 📝 Log Activity
+        if: always()
+        run: |
+          echo "[$(date -u +%Y-%m-%dT%H:%M:%SZ)] [COORDINATOR] [RUN] Should create PR: ${{ steps.check.outputs.should_create_pr }}, Next task: ${{ steps.check.outputs.next_task }}" >> .github/agent-logs/activity.log
+
+          # Update stats
+          node -e "
+            const fs = require('fs');
+            const stats = JSON.parse(fs.readFileSync('.github/agent-logs/stats.json'));
+            stats.agents.coordinator.runs++;
+            stats.agents.coordinator.lastRun = new Date().toISOString();
+            stats.totalRuns++;
+            stats.lastActivity = new Date().toISOString();
+            fs.writeFileSync('.github/agent-logs/stats.json', JSON.stringify(stats, null, 2));
+          "
+
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add .github/agent-logs/ || true
+          git diff --staged --quiet || git commit -m "📊 Update agent logs [skip ci]"
+          git push || true
+

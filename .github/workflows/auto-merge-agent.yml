@@ -143,10 +143,37 @@ jobs:
                 
                 // Only merge one PR per run to avoid conflicts
                 console.log('⏸️ Stopping after one merge to let CI run on main');
+
+                // Set output for logging
+                core.setOutput('merged_pr', pr.number);
                 break;
-                
+
               } catch (error) {
                 console.log(`❌ Error processing PR #${pr.number}: ${error.message}`);
               }
             }
 
+            core.setOutput('ai_prs_count', aiPRs.length);
+
+      - name: 📝 Log Activity
+        if: always()
+        run: |
+          echo "[$(date -u +%Y-%m-%dT%H:%M:%SZ)] [AUTO-MERGE] [RUN] Checked PRs, merged: ${{ steps.*.outputs.merged_pr || 'none' }}" >> .github/agent-logs/activity.log
+
+          # Update stats
+          node -e "
+            const fs = require('fs');
+            const stats = JSON.parse(fs.readFileSync('.github/agent-logs/stats.json'));
+            stats.agents.autoMerge.runs++;
+            stats.agents.autoMerge.lastRun = new Date().toISOString();
+            stats.totalRuns++;
+            stats.lastActivity = new Date().toISOString();
+            fs.writeFileSync('.github/agent-logs/stats.json', JSON.stringify(stats, null, 2));
+          "
+
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git pull --rebase || true
+          git add .github/agent-logs/ || true
+          git diff --staged --quiet || git commit -m "📊 Update agent logs [skip ci]"
+          git push || true

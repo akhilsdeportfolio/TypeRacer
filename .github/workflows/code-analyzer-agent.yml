@@ -183,3 +183,25 @@ jobs:
           git diff --staged --quiet || git commit -m "🔬 Update analysis queue [skip ci]"
           git push || true
 
+      - name: 📝 Log Activity
+        if: always()
+        run: |
+          ANALYZED="${{ steps.analyze.outputs.analysis_complete || 'false' }}"
+          echo "[$(date -u +%Y-%m-%dT%H:%M:%SZ)] [ANALYZER] [RUN] Analysis complete: $ANALYZED" >> .github/agent-logs/activity.log
+
+          # Update stats
+          node -e "
+            const fs = require('fs');
+            const stats = JSON.parse(fs.readFileSync('.github/agent-logs/stats.json'));
+            stats.agents.analyzer.runs++;
+            stats.agents.analyzer.lastRun = new Date().toISOString();
+            stats.totalRuns++;
+            if ('$ANALYZED' === 'true') stats.filesAnalyzed++;
+            stats.lastActivity = new Date().toISOString();
+            fs.writeFileSync('.github/agent-logs/stats.json', JSON.stringify(stats, null, 2));
+          "
+
+          git pull --rebase || true
+          git add .github/agent-logs/ || true
+          git diff --staged --quiet || git commit -m "📊 Update agent logs [skip ci]"
+          git push || true

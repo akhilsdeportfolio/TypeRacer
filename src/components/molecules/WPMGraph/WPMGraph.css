@@ -1,0 +1,75 @@
+.wpm-graph {
+  width: 100%;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 2px solid #e5e7eb;
+  margin: 20px 0;
+}
+
+.wpm-graph__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.wpm-graph__title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+}
+
+.wpm-graph__current {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.wpm-graph__current-value {
+  font-size: 36px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.wpm-graph__current-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.wpm-graph__canvas {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Dark Mode */
+body.dark-mode .wpm-graph {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-color: #374151;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .wpm-graph__title {
+  color: #e5e7eb;
+}
+
+body.dark-mode .wpm-graph__current-value {
+  background: linear-gradient(135deg, #818cf8 0%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+body.dark-mode .wpm-graph__current-label {
+  color: #9ca3af;
+}
+

@@ -1,0 +1,69 @@
+.text {
+  margin: 0;
+  padding: 0;
+}
+
+.text--h1 {
+  font-size: 48px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+
+.text--h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.text--h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.text--body {
+  font-size: 16px;
+  font-weight: 400;
+  color: #333;
+  line-height: 1.6;
+}
+
+.text--small {
+  font-size: 14px;
+  font-weight: 400;
+  color: #666;
+}
+
+.text--label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Dark Mode */
+body.dark-mode .text--h1 {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+body.dark-mode .text--h2,
+body.dark-mode .text--h3,
+body.dark-mode .text--body {
+  color: #e0e0e0;
+}
+
+body.dark-mode .text--small,
+body.dark-mode .text--label {
+  color: #aaa;
+}
+

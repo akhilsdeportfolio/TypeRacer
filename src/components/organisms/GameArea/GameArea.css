@@ -1,0 +1,91 @@
+.game-area {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border: 2px solid #e0e7ff;
+  border-radius: 16px;
+  padding: 32px;
+  margin: 24px 0;
+  position: relative;
+  min-height: 200px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.game-area:focus-within {
+  border-color: #667eea;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15), 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.game-area__content {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  line-height: 1.8;
+  margin-bottom: 24px;
+  font-size: 24px;
+  color: #1f2937;
+}
+
+.game-area__input {
+  width: 100%;
+  padding: 16px 20px;
+  font-size: 18px;
+  border: 2px solid #d1d5db;
+  border-radius: 12px;
+  outline: none;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  box-sizing: border-box;
+  background: #ffffff;
+  color: #1f2937;
+}
+
+.game-area__input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+  background: #ffffff;
+}
+
+.game-area__input:disabled {
+  background: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+  opacity: 0.7;
+  border-color: #e5e7eb;
+}
+
+/* Dark Mode */
+body.dark-mode .game-area {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-color: #374151;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .game-area:focus-within {
+  border-color: #667eea;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.25), 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .game-area__content {
+  color: #e5e7eb;
+}
+
+body.dark-mode .game-area__input {
+  background: #0f172a;
+  color: #e5e7eb;
+  border-color: #4b5563;
+}
+
+body.dark-mode .game-area__input:focus {
+  background: #1e293b;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.25);
+}
+
+body.dark-mode .game-area__input:disabled {
+  background: #111827;
+  color: #6b7280;
+  border-color: #374151;
+}
+

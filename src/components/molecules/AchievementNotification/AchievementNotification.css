@@ -1,0 +1,127 @@
+.achievement-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 2000;
+  max-width: 400px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border: 2px solid #10b981;
+  transform: translateX(450px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.achievement-notification--visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.achievement-notification__content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.achievement-notification__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.achievement-notification__badge {
+  display: inline-block;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.achievement-notification__body {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.achievement-notification__icon {
+  font-size: 48px;
+  flex-shrink: 0;
+  animation: bounce 0.6s ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.achievement-notification__text {
+  flex: 1;
+}
+
+.achievement-notification__name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 4px 0;
+}
+
+.achievement-notification__description {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.achievement-notification__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: all 0.2s;
+  border-radius: 4px;
+}
+
+.achievement-notification__close:hover {
+  background: #f3f4f6;
+  color: #1f2937;
+}
+
+/* Dark Mode */
+body.dark-mode .achievement-notification {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-color: #10b981;
+}
+
+body.dark-mode .achievement-notification__name {
+  color: #e5e7eb;
+}
+
+body.dark-mode .achievement-notification__description {
+  color: #9ca3af;
+}
+
+body.dark-mode .achievement-notification__close {
+  color: #9ca3af;
+}
+
+body.dark-mode .achievement-notification__close:hover {
+  background: #374151;
+  color: #e5e7eb;
+}
+

@@ -3,8 +3,7 @@
  * Tests the GameArea component with real user interactions
  */
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, fireEvent } from '@testing-library/react';
 import GameArea from '../components/organisms/GameArea';
 
 describe('GameArea Integration', () => {

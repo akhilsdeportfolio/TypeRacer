@@ -18,12 +18,10 @@ describe('Timer and GameState Integration', () => {
 
   it('should finish game when timer expires', () => {
     const targetText = 'Hello World';
-    let gameResult;
-    let timerResult;
 
     // Render game state hook
     const gameHook = renderHook(() => useGameState(targetText));
-    gameResult = gameHook.result;
+    const gameResult = gameHook.result;
 
     // Create finish callback that uses game state
     const onFinish = () => {
@@ -33,10 +31,10 @@ describe('Timer and GameState Integration', () => {
     };
 
     // Render timer hook with game's finish callback
-    const timerHook = renderHook(() => 
+    const timerHook = renderHook(() =>
       useTimer({ allowedTime: 5, onFinish })
     );
-    timerResult = timerHook.result;
+    const timerResult = timerHook.result;
 
     // Start game and timer
     act(() => {
@@ -58,11 +56,9 @@ describe('Timer and GameState Integration', () => {
 
   it('should preserve stats when game finishes via timer', () => {
     const targetText = 'Hello World';
-    let gameResult;
-    let timerResult;
 
     const gameHook = renderHook(() => useGameState(targetText));
-    gameResult = gameHook.result;
+    const gameResult = gameHook.result;
 
     const onFinish = () => {
       act(() => {
@@ -70,10 +66,10 @@ describe('Timer and GameState Integration', () => {
       });
     };
 
-    const timerHook = renderHook(() => 
+    const timerHook = renderHook(() =>
       useTimer({ allowedTime: 10, onFinish })
     );
-    timerResult = timerHook.result;
+    const timerResult = timerHook.result;
 
     // Start game and timer
     act(() => {
@@ -99,16 +95,14 @@ describe('Timer and GameState Integration', () => {
 
   it('should reset both timer and game state on restart', () => {
     const targetText = 'Hello World';
-    let gameResult;
-    let timerResult;
-
+    
     const gameHook = renderHook(() => useGameState(targetText));
-    gameResult = gameHook.result;
+    const gameResult = gameHook.result;
 
     const timerHook = renderHook(() => 
       useTimer({ allowedTime: 60, onFinish: jest.fn() })
     );
-    timerResult = timerHook.result;
+    const timerResult = timerHook.result;
 
     // Start and play for a bit
     act(() => {
@@ -140,16 +134,14 @@ describe('Timer and GameState Integration', () => {
 
   it('should count down in sync with game progress', () => {
     const targetText = 'Hello';
-    let gameResult;
-    let timerResult;
-
+    
     const gameHook = renderHook(() => useGameState(targetText));
-    gameResult = gameHook.result;
+    const gameResult = gameHook.result;
 
     const timerHook = renderHook(() => 
       useTimer({ allowedTime: 10, onFinish: jest.fn() })
     );
-    timerResult = timerHook.result;
+    const timerResult = timerHook.result;
 
     act(() => {
       gameResult.current.startGame();

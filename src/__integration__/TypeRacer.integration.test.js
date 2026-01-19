@@ -3,9 +3,9 @@
  * Tests the complete TypeRacer application flow
  */
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import TypeRacerRefactored from '../components/TypeRacerRefactored';
-import { PARAGRAPHS, DIFFICULTY_LEVELS } from '../constants';
+import { PARAGRAPHS } from '../constants';
 
 // Mock localStorage
 const localStorageMock = (() => {

@@ -1,0 +1,171 @@
+# Agent Coordinator - Orchestrates all AI agents to work in sync
+# Prevents conflicts, manages task queue, and coordinates work
+
+name: 🎯 Agent Coordinator
+
+on:
+  schedule:
+    # Run every 3 minutes to coordinate agents
+    - cron: "*/3 * * * *"
+  workflow_dispatch:
+  issues:
+    types: [opened, labeled]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  actions: write
+
+jobs:
+  coordinate:
+    runs-on: ubuntu-latest
+    outputs:
+      should_create_pr: ${{ steps.check.outputs.should_create_pr }}
+      next_task: ${{ steps.check.outputs.next_task }}
+    steps:
+      - name: 🛎️ Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🎯 Coordinate Agents
+        id: check
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            
+            console.log('🎯 Agent Coordinator starting...');
+            
+            // 1. Check current state - how many open PRs?
+            const { data: pulls } = await github.rest.pulls.list({
+              owner, repo, state: 'open', per_page: 100
+            });
+            
+            const aiPRs = pulls.filter(pr => 
+              pr.user.login === 'github-actions[bot]'
+            );
+            
+            console.log(`📊 Status: ${aiPRs.length} AI PRs open`);
+            
+            // 2. Check for analysis issues (task queue)
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner, repo, state: 'open', labels: 'ai-analysis', per_page: 20
+            });
+            
+            console.log(`📋 Task Queue: ${issues.length} analysis issues`);
+            
+            // 3. Coordination rules
+            let shouldCreatePR = true;
+            let nextTask = 'improve';
+            let action = 'continue';
+            
+            // Rule 1: Max 3 open AI PRs at a time
+            if (aiPRs.length >= 3) {
+              console.log('⏸️ Too many open PRs, pausing PR creation');
+              shouldCreatePR = false;
+              action = 'wait_for_merge';
+            }
+            
+            // Rule 2: If analysis issues exist, prioritize them
+            if (issues.length > 0 && shouldCreatePR) {
+              const oldestIssue = issues[issues.length - 1];
+              console.log(`📌 Found task in queue: Issue #${oldestIssue.number}`);
+              nextTask = `implement_analysis_${oldestIssue.number}`;
+              
+              // Add 'in-progress' label
+              try {
+                await github.rest.issues.addLabels({
+                  owner, repo,
+                  issue_number: oldestIssue.number,
+                  labels: ['in-progress']
+                });
+              } catch(e) {}
+            }
+            
+            // Rule 3: Check for merge conflicts in existing PRs
+            for (const pr of aiPRs) {
+              const { data: prDetails } = await github.rest.pulls.get({
+                owner, repo, pull_number: pr.number
+              });
+              
+              if (prDetails.mergeable === false) {
+                console.log(`⚠️ PR #${pr.number} has conflicts, closing...`);
+                
+                await github.rest.issues.createComment({
+                  owner, repo,
+                  issue_number: pr.number,
+                  body: '🔄 **Auto-closed**: This PR has merge conflicts due to newer changes. The agent will create a fresh PR.'
+                });
+                
+                await github.rest.pulls.update({
+                  owner, repo,
+                  pull_number: pr.number,
+                  state: 'closed'
+                });
+              }
+            }
+            
+            // 4. Update coordination status
+            const statusBody = `## 🎯 Agent Coordination Status
+            
+            **Last Updated:** ${new Date().toISOString()}
+            
+            ### Current State
+            - 🔄 Open AI PRs: ${aiPRs.length}/3
+            - 📋 Pending Analysis Tasks: ${issues.length}
+            - ✅ Should Create PR: ${shouldCreatePR}
+            - 📌 Next Task: ${nextTask}
+            - 🎬 Action: ${action}
+            
+            ### Active PRs
+            ${aiPRs.map(pr => `- #${pr.number}: ${pr.title}`).join('\n') || 'None'}
+            
+            ### Task Queue
+            ${issues.map(i => `- #${i.number}: ${i.title}`).join('\n') || 'Empty'}
+            `;
+            
+            // Find or create status issue
+            const { data: statusIssues } = await github.rest.issues.listForRepo({
+              owner, repo, state: 'open', labels: 'agent-status', per_page: 1
+            });
+            
+            if (statusIssues.length > 0) {
+              await github.rest.issues.update({
+                owner, repo,
+                issue_number: statusIssues[0].number,
+                body: statusBody
+              });
+            } else {
+              await github.rest.issues.create({
+                owner, repo,
+                title: '🎯 Agent Coordination Dashboard',
+                body: statusBody,
+                labels: ['agent-status', 'automated']
+              });
+            }
+            
+            core.setOutput('should_create_pr', shouldCreatePR);
+            core.setOutput('next_task', nextTask);
+            
+            console.log('🎯 Coordination complete');
+
+      - name: 🚀 Trigger AI Agent if Needed
+        if: steps.check.outputs.should_create_pr == 'true'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            // Trigger the AI agent workflow
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'ai-agent.yml',
+              ref: 'main',
+              inputs: {
+                task_type: 'random'
+              }
+            });
+            console.log('🚀 Triggered AI Agent workflow');
+

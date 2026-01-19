@@ -1,14 +1,11 @@
 # Augment AI Agent - Continuously modifies and improves the codebase
 # Uses official Augment Code CLI (auggie)
-# Runs every hour during the day (configurable)
+# Coordinated by Agent Coordinator - don't run on schedule, triggered by coordinator
 
 name: 🤖 Augment AI Agent
 
 on:
-  schedule:
-    # Run every minute, 24/7
-    - cron: "* * * * *"
-  workflow_dispatch: # Allow manual triggering
+  workflow_dispatch: # Triggered by coordinator or manually
     inputs:
       instruction:
         description: "Custom instruction for the AI agent"
@@ -18,19 +15,22 @@ on:
       task_type:
         description: "Type of task to perform"
         required: false
-        default: "improve"
+        default: "random"
         type: choice
         options:
+          - random
           - improve
           - refactor
           - add-tests
           - fix-bugs
           - add-comments
           - optimize
+          - implement-analysis
 
 permissions:
   contents: write
   pull-requests: write
+  issues: read
 
 env:
   NODE_VERSION: "22"
@@ -62,7 +62,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Build the instruction based on task type
-          TASK_TYPE="${{ github.event.inputs.task_type || 'improve' }}"
+          TASK_TYPE="${{ github.event.inputs.task_type || 'random' }}"
+
+          # If random, pick a random task
+          if [ "$TASK_TYPE" = "random" ]; then
+            TASKS=("improve" "refactor" "add-tests" "fix-bugs" "add-comments" "optimize")
+            TASK_TYPE=${TASKS[$RANDOM % ${#TASKS[@]}]}
+            echo "🎲 Random task selected: $TASK_TYPE"
+          fi
 
           case $TASK_TYPE in
             improve)
@@ -83,10 +90,15 @@ jobs:
             optimize)
               INSTRUCTION="Find performance optimization opportunities. Apply memoization, lazy loading, or algorithm improvements."
               ;;
+            implement-analysis)
+              INSTRUCTION="Check the .github/analysis-queue.json file for pending enhancement tasks. Implement the highest priority suggestion from the analysis."
+              ;;
             *)
               INSTRUCTION="${{ github.event.inputs.instruction }}"
               ;;
           esac
+
+          echo "task_type=$TASK_TYPE" >> $GITHUB_OUTPUT
 
           echo "Running Auggie with instruction: $INSTRUCTION"
 
@@ -112,7 +124,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "🤖 Augment Agent: ${{ steps.auggie.outputs.summary }}"
-          title: "🤖 Augment Agent: ${{ github.event.inputs.task_type || 'improve' }}"
+          title: "🤖 Augment Agent: ${{ steps.auggie.outputs.task_type || 'improve' }}"
           body: |
             ## 🤖 Augment AI Agent Automated Changes
 

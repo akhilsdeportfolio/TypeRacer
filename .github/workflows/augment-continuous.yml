@@ -1,12 +1,10 @@
-# Continuous Augment Agent - Runs every 2 hours to improve the codebase
+# Continuous Augment Agent - Triggered by Agent Coordinator
 # Uses Augment Code CLI (auggie)
+# NOTE: Schedule removed - now triggered by agent-coordinator.yml
 
 name: 🤖 Continuous Improvement Agent
 
 on:
-  schedule:
-    # Run every 2 hours from 8 AM to 8 PM UTC on weekdays
-    - cron: "0 8,10,12,14,16,18,20 * * 1-5"
   workflow_dispatch:
     inputs:
       instruction:

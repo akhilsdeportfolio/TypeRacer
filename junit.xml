@@ -1,117 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="122" failures="0" errors="0" time="3.712">
-  <testsuite name="useLocalStorage hook" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:33:50" time="1.42" tests="9">
-    <testcase classname="useLocalStorage hook useLocalStorage should return initial value when localStorage is empty" name="useLocalStorage hook useLocalStorage should return initial value when localStorage is empty" time="0.01">
+<testsuites name="jest tests" tests="122" failures="0" errors="0" time="2.725">
+  <testsuite name="useLocalStorage hook" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:36:04" time="0.944" tests="9">
+    <testcase classname="useLocalStorage hook useLocalStorage should return initial value when localStorage is empty" name="useLocalStorage hook useLocalStorage should return initial value when localStorage is empty" time="0.056">
     </testcase>
     <testcase classname="useLocalStorage hook useLocalStorage should return value from localStorage if it exists" name="useLocalStorage hook useLocalStorage should return value from localStorage if it exists" time="0.002">
     </testcase>
-    <testcase classname="useLocalStorage hook useLocalStorage should update localStorage when setValue is called" name="useLocalStorage hook useLocalStorage should update localStorage when setValue is called" time="0.004">
+    <testcase classname="useLocalStorage hook useLocalStorage should update localStorage when setValue is called" name="useLocalStorage hook useLocalStorage should update localStorage when setValue is called" time="0.002">
     </testcase>
-    <testcase classname="useLocalStorage hook useLocalStorage should handle function updates like useState" name="useLocalStorage hook useLocalStorage should handle function updates like useState" time="0.001">
+    <testcase classname="useLocalStorage hook useLocalStorage should handle function updates like useState" name="useLocalStorage hook useLocalStorage should handle function updates like useState" time="0.002">
     </testcase>
-    <testcase classname="useLocalStorage hook useLocalStorage should handle objects and arrays" name="useLocalStorage hook useLocalStorage should handle objects and arrays" time="0.001">
+    <testcase classname="useLocalStorage hook useLocalStorage should handle objects and arrays" name="useLocalStorage hook useLocalStorage should handle objects and arrays" time="0.007">
     </testcase>
     <testcase classname="useLocalStorage hook useLocalStorageBoolean should return initial value when localStorage is empty" name="useLocalStorage hook useLocalStorageBoolean should return initial value when localStorage is empty" time="0.001">
     </testcase>
-    <testcase classname="useLocalStorage hook useLocalStorageBoolean should parse true from localStorage" name="useLocalStorage hook useLocalStorageBoolean should parse true from localStorage" time="0">
+    <testcase classname="useLocalStorage hook useLocalStorageBoolean should parse true from localStorage" name="useLocalStorage hook useLocalStorageBoolean should parse true from localStorage" time="0.001">
     </testcase>
-    <testcase classname="useLocalStorage hook useLocalStorageBoolean should parse false from localStorage" name="useLocalStorage hook useLocalStorageBoolean should parse false from localStorage" time="0.001">
+    <testcase classname="useLocalStorage hook useLocalStorageBoolean should parse false from localStorage" name="useLocalStorage hook useLocalStorageBoolean should parse false from localStorage" time="0">
     </testcase>
     <testcase classname="useLocalStorage hook useLocalStorageBoolean should toggle boolean values" name="useLocalStorage hook useLocalStorageBoolean should toggle boolean values" time="0.002">
     </testcase>
   </testsuite>
-  <testsuite name="useTimer hook" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:33:50" time="1.474" tests="6">
-    <testcase classname="useTimer hook should initialize with the allowed time" name="useTimer hook should initialize with the allowed time" time="0.012">
+  <testsuite name="useTimer hook" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:36:04" time="0.981" tests="6">
+    <testcase classname="useTimer hook should initialize with the allowed time" name="useTimer hook should initialize with the allowed time" time="0.056">
     </testcase>
-    <testcase classname="useTimer hook should start counting down when startTimer is called" name="useTimer hook should start counting down when startTimer is called" time="0.051">
+    <testcase classname="useTimer hook should start counting down when startTimer is called" name="useTimer hook should start counting down when startTimer is called" time="0.038">
     </testcase>
-    <testcase classname="useTimer hook should call onFinish when time reaches 0" name="useTimer hook should call onFinish when time reaches 0" time="0.003">
+    <testcase classname="useTimer hook should call onFinish when time reaches 0" name="useTimer hook should call onFinish when time reaches 0" time="0.002">
     </testcase>
     <testcase classname="useTimer hook should reset timer to initial value" name="useTimer hook should reset timer to initial value" time="0.002">
     </testcase>
-    <testcase classname="useTimer hook should not start multiple timers" name="useTimer hook should not start multiple timers" time="0.004">
+    <testcase classname="useTimer hook should not start multiple timers" name="useTimer hook should not start multiple timers" time="0.003">
     </testcase>
     <testcase classname="useTimer hook should update time when allowedTime prop changes" name="useTimer hook should update time when allowedTime prop changes" time="0.002">
     </testcase>
   </testsuite>
-  <testsuite name="Character component" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:33:50" time="1.972" tests="10">
-    <testcase classname="Character component should render the character" name="Character component should render the character" time="0.032">
+  <testsuite name="Timer and GameState Integration" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:36:05" time="0.248" tests="4">
+    <testcase classname="Timer and GameState Integration should finish game when timer expires" name="Timer and GameState Integration should finish game when timer expires" time="0.02">
     </testcase>
-    <testcase classname="Character component should render space character" name="Character component should render space character" time="0.002">
+    <testcase classname="Timer and GameState Integration should preserve stats when game finishes via timer" name="Timer and GameState Integration should preserve stats when game finishes via timer" time="0.002">
     </testcase>
-    <testcase classname="Character component should apply pending status by default" name="Character component should apply pending status by default" time="0.003">
+    <testcase classname="Timer and GameState Integration should reset both timer and game state on restart" name="Timer and GameState Integration should reset both timer and game state on restart" time="0.002">
     </testcase>
-    <testcase classname="Character component should apply correct status class" name="Character component should apply correct status class" time="0.003">
-    </testcase>
-    <testcase classname="Character component should apply incorrect status class" name="Character component should apply incorrect status class" time="0.002">
-    </testcase>
-    <testcase classname="Character component should apply cursor class when isCursor is true" name="Character component should apply cursor class when isCursor is true" time="0.001">
-    </testcase>
-    <testcase classname="Character component should not apply cursor class when isCursor is false" name="Character component should not apply cursor class when isCursor is false" time="0.001">
-    </testcase>
-    <testcase classname="Character component should apply custom className" name="Character component should apply custom className" time="0.001">
-    </testcase>
-    <testcase classname="Character component should combine all classes correctly" name="Character component should combine all classes correctly" time="0.002">
-    </testcase>
-    <testcase classname="Character component should render special characters" name="Character component should render special characters" time="0.001">
+    <testcase classname="Timer and GameState Integration should count down in sync with game progress" name="Timer and GameState Integration should count down in sync with game progress" time="0.01">
     </testcase>
   </testsuite>
-  <testsuite name="Button component" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:33:50" time="2.011" tests="12">
-    <testcase classname="Button component should render with children" name="Button component should render with children" time="0.027">
+  <testsuite name="Button component" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:36:04" time="1.383" tests="12">
+    <testcase classname="Button component should render with children" name="Button component should render with children" time="0.019">
     </testcase>
     <testcase classname="Button component should call onClick when clicked" name="Button component should call onClick when clicked" time="0.006">
     </testcase>
-    <testcase classname="Button component should be disabled when disabled prop is true" name="Button component should be disabled when disabled prop is true" time="0.002">
+    <testcase classname="Button component should be disabled when disabled prop is true" name="Button component should be disabled when disabled prop is true" time="0.004">
     </testcase>
-    <testcase classname="Button component should not call onClick when disabled" name="Button component should not call onClick when disabled" time="0.002">
+    <testcase classname="Button component should not call onClick when disabled" name="Button component should not call onClick when disabled" time="0.005">
     </testcase>
     <testcase classname="Button component should apply primary variant class by default" name="Button component should apply primary variant class by default" time="0.002">
     </testcase>
-    <testcase classname="Button component should apply secondary variant class" name="Button component should apply secondary variant class" time="0.007">
+    <testcase classname="Button component should apply secondary variant class" name="Button component should apply secondary variant class" time="0.003">
     </testcase>
-    <testcase classname="Button component should apply icon variant class" name="Button component should apply icon variant class" time="0.001">
+    <testcase classname="Button component should apply icon variant class" name="Button component should apply icon variant class" time="0.002">
     </testcase>
-    <testcase classname="Button component should apply size classes" name="Button component should apply size classes" time="0.016">
+    <testcase classname="Button component should apply size classes" name="Button component should apply size classes" time="0.006">
     </testcase>
-    <testcase classname="Button component should apply custom className" name="Button component should apply custom className" time="0.004">
+    <testcase classname="Button component should apply custom className" name="Button component should apply custom className" time="0.002">
     </testcase>
     <testcase classname="Button component should render with title attribute" name="Button component should render with title attribute" time="0.001">
     </testcase>
     <testcase classname="Button component should have correct button type" name="Button component should have correct button type" time="0.002">
     </testcase>
-    <testcase classname="Button component should default to type button" name="Button component should default to type button" time="0.001">
+    <testcase classname="Button component should default to type button" name="Button component should default to type button" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="ProgressBar component" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:33:50" time="2.056" tests="11">
-    <testcase classname="ProgressBar component should render with default progress of 0" name="ProgressBar component should render with default progress of 0" time="0.034">
+  <testsuite name="Character component" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:36:04" time="1.391" tests="10">
+    <testcase classname="Character component should render the character" name="Character component should render the character" time="0.02">
+    </testcase>
+    <testcase classname="Character component should render space character" name="Character component should render space character" time="0.003">
+    </testcase>
+    <testcase classname="Character component should apply pending status by default" name="Character component should apply pending status by default" time="0.004">
+    </testcase>
+    <testcase classname="Character component should apply correct status class" name="Character component should apply correct status class" time="0.008">
+    </testcase>
+    <testcase classname="Character component should apply incorrect status class" name="Character component should apply incorrect status class" time="0.005">
+    </testcase>
+    <testcase classname="Character component should apply cursor class when isCursor is true" name="Character component should apply cursor class when isCursor is true" time="0.001">
+    </testcase>
+    <testcase classname="Character component should not apply cursor class when isCursor is false" name="Character component should not apply cursor class when isCursor is false" time="0.002">
+    </testcase>
+    <testcase classname="Character component should apply custom className" name="Character component should apply custom className" time="0.002">
+    </testcase>
+    <testcase classname="Character component should combine all classes correctly" name="Character component should combine all classes correctly" time="0.006">
+    </testcase>
+    <testcase classname="Character component should render special characters" name="Character component should render special characters" time="0.004">
+    </testcase>
+  </testsuite>
+  <testsuite name="ProgressBar component" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:36:04" time="1.403" tests="11">
+    <testcase classname="ProgressBar component should render with default progress of 0" name="ProgressBar component should render with default progress of 0" time="0.022">
     </testcase>
     <testcase classname="ProgressBar component should display the correct progress percentage" name="ProgressBar component should display the correct progress percentage" time="0.003">
     </testcase>
-    <testcase classname="ProgressBar component should clamp progress to 100 when exceeding" name="ProgressBar component should clamp progress to 100 when exceeding" time="0.004">
+    <testcase classname="ProgressBar component should clamp progress to 100 when exceeding" name="ProgressBar component should clamp progress to 100 when exceeding" time="0.003">
     </testcase>
     <testcase classname="ProgressBar component should clamp progress to 0 when negative" name="ProgressBar component should clamp progress to 0 when negative" time="0.001">
     </testcase>
-    <testcase classname="ProgressBar component should hide label when showLabel is false" name="ProgressBar component should hide label when showLabel is false" time="0.002">
+    <testcase classname="ProgressBar component should hide label when showLabel is false" name="ProgressBar component should hide label when showLabel is false" time="0.004">
     </testcase>
-    <testcase classname="ProgressBar component should apply default variant class" name="ProgressBar component should apply default variant class" time="0.001">
+    <testcase classname="ProgressBar component should apply default variant class" name="ProgressBar component should apply default variant class" time="0.002">
     </testcase>
-    <testcase classname="ProgressBar component should apply success variant class" name="ProgressBar component should apply success variant class" time="0.001">
+    <testcase classname="ProgressBar component should apply success variant class" name="ProgressBar component should apply success variant class" time="0.002">
     </testcase>
     <testcase classname="ProgressBar component should apply warning variant class" name="ProgressBar component should apply warning variant class" time="0.001">
     </testcase>
     <testcase classname="ProgressBar component should apply custom className" name="ProgressBar component should apply custom className" time="0.002">
     </testcase>
-    <testcase classname="ProgressBar component should set fill width based on progress" name="ProgressBar component should set fill width based on progress" time="0.038">
+    <testcase classname="ProgressBar component should set fill width based on progress" name="ProgressBar component should set fill width based on progress" time="0.026">
     </testcase>
     <testcase classname="ProgressBar component should render track element" name="ProgressBar component should render track element" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="StatCard component" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:33:50" time="2.102" tests="12">
-    <testcase classname="StatCard component should render label and value" name="StatCard component should render label and value" time="0.03">
+  <testsuite name="StatCard component" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:36:04" time="1.397" tests="12">
+    <testcase classname="StatCard component should render label and value" name="StatCard component should render label and value" time="0.026">
     </testcase>
-    <testcase classname="StatCard component should render string value" name="StatCard component should render string value" time="0.006">
+    <testcase classname="StatCard component should render string value" name="StatCard component should render string value" time="0.008">
     </testcase>
-    <testcase classname="StatCard component should render icon when provided" name="StatCard component should render icon when provided" time="0.002">
+    <testcase classname="StatCard component should render icon when provided" name="StatCard component should render icon when provided" time="0.005">
     </testcase>
     <testcase classname="StatCard component should not render icon when not provided" name="StatCard component should not render icon when not provided" time="0.002">
     </testcase>
@@ -125,27 +135,63 @@
     </testcase>
     <testcase classname="StatCard component should apply custom className" name="StatCard component should apply custom className" time="0.001">
     </testcase>
-    <testcase classname="StatCard component should render content structure correctly" name="StatCard component should render content structure correctly" time="0.002">
+    <testcase classname="StatCard component should render content structure correctly" name="StatCard component should render content structure correctly" time="0.003">
     </testcase>
     <testcase classname="StatCard component should handle zero value" name="StatCard component should handle zero value" time="0.001">
     </testcase>
-    <testcase classname="StatCard component should handle large numbers" name="StatCard component should handle large numbers" time="0.001">
+    <testcase classname="StatCard component should handle large numbers" name="StatCard component should handle large numbers" time="0.003">
     </testcase>
   </testsuite>
-  <testsuite name="Timer and GameState Integration" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:33:52" time="0.627" tests="4">
-    <testcase classname="Timer and GameState Integration should finish game when timer expires" name="Timer and GameState Integration should finish game when timer expires" time="0.014">
+  <testsuite name="GameArea Integration" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:36:05" time="0.659" tests="8">
+    <testcase classname="GameArea Integration Character rendering and status should render all characters as pending initially" name="GameArea Integration Character rendering and status should render all characters as pending initially" time="0.023">
     </testcase>
-    <testcase classname="Timer and GameState Integration should preserve stats when game finishes via timer" name="Timer and GameState Integration should preserve stats when game finishes via timer" time="0.003">
+    <testcase classname="GameArea Integration Character rendering and status should mark correct characters with correct status" name="GameArea Integration Character rendering and status should mark correct characters with correct status" time="0.006">
     </testcase>
-    <testcase classname="Timer and GameState Integration should reset both timer and game state on restart" name="Timer and GameState Integration should reset both timer and game state on restart" time="0.002">
+    <testcase classname="GameArea Integration Character rendering and status should mark incorrect characters with incorrect status" name="GameArea Integration Character rendering and status should mark incorrect characters with incorrect status" time="0.002">
     </testcase>
-    <testcase classname="Timer and GameState Integration should count down in sync with game progress" name="Timer and GameState Integration should count down in sync with game progress" time="0.022">
+    <testcase classname="GameArea Integration Character rendering and status should show cursor at current typing position" name="GameArea Integration Character rendering and status should show cursor at current typing position" time="0.002">
+    </testcase>
+    <testcase classname="GameArea Integration Input handling should call onInputChange when user types" name="GameArea Integration Input handling should call onInputChange when user types" time="0.005">
+    </testcase>
+    <testcase classname="GameArea Integration Input handling should call onInputChange for each character typed" name="GameArea Integration Input handling should call onInputChange for each character typed" time="0.005">
+    </testcase>
+    <testcase classname="GameArea Integration Input handling should disable input when disabled prop is true" name="GameArea Integration Input handling should disable input when disabled prop is true" time="0.001">
+    </testcase>
+    <testcase classname="GameArea Integration Completion flow should mark all characters as correct when text is complete" name="GameArea Integration Completion flow should mark all characters as correct when text is complete" time="0.002">
     </testcase>
   </testsuite>
-  <testsuite name="calculations utility functions" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:33:52" time="0.189" tests="24">
-    <testcase classname="calculations utility functions calculateWPM should return 0 when time is 0 or negative" name="calculations utility functions calculateWPM should return 0 when time is 0 or negative" time="0">
+  <testsuite name="GameState Integration" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:36:05" time="0.317" tests="13">
+    <testcase classname="GameState Integration Game lifecycle should start in initial state" name="GameState Integration Game lifecycle should start in initial state" time="0.002">
     </testcase>
-    <testcase classname="calculations utility functions calculateWPM should calculate WPM correctly" name="calculations utility functions calculateWPM should calculate WPM correctly" time="0.001">
+    <testcase classname="GameState Integration Game lifecycle should transition to playing state when game starts" name="GameState Integration Game lifecycle should transition to playing state when game starts" time="0">
+    </testcase>
+    <testcase classname="GameState Integration Game lifecycle should transition to finished state when game finishes" name="GameState Integration Game lifecycle should transition to finished state when game finishes" time="0.001">
+    </testcase>
+    <testcase classname="GameState Integration Game lifecycle should reset to initial state on reset" name="GameState Integration Game lifecycle should reset to initial state on reset" time="0">
+    </testcase>
+    <testcase classname="GameState Integration Input handling should not accept input before game starts" name="GameState Integration Input handling should not accept input before game starts" time="0.001">
+    </testcase>
+    <testcase classname="GameState Integration Input handling should accept input when game is playing" name="GameState Integration Input handling should accept input when game is playing" time="0">
+    </testcase>
+    <testcase classname="GameState Integration Input handling should not accept input longer than target text" name="GameState Integration Input handling should not accept input longer than target text" time="0.001">
+    </testcase>
+    <testcase classname="GameState Integration Statistics calculation should calculate correct accuracy" name="GameState Integration Statistics calculation should calculate correct accuracy" time="0.001">
+    </testcase>
+    <testcase classname="GameState Integration Statistics calculation should calculate progress correctly" name="GameState Integration Statistics calculation should calculate progress correctly" time="0.002">
+    </testcase>
+    <testcase classname="GameState Integration Statistics calculation should detect completion" name="GameState Integration Statistics calculation should detect completion" time="0.001">
+    </testcase>
+    <testcase classname="GameState Integration Streak tracking should increment streak for correct characters" name="GameState Integration Streak tracking should increment streak for correct characters" time="0">
+    </testcase>
+    <testcase classname="GameState Integration Streak tracking should reset streak on incorrect character" name="GameState Integration Streak tracking should reset streak on incorrect character" time="0.001">
+    </testcase>
+    <testcase classname="GameState Integration Streak tracking should track maximum streak" name="GameState Integration Streak tracking should track maximum streak" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="calculations utility functions" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:36:05" time="0.246" tests="24">
+    <testcase classname="calculations utility functions calculateWPM should return 0 when time is 0 or negative" name="calculations utility functions calculateWPM should return 0 when time is 0 or negative" time="0.001">
+    </testcase>
+    <testcase classname="calculations utility functions calculateWPM should calculate WPM correctly" name="calculations utility functions calculateWPM should calculate WPM correctly" time="0">
     </testcase>
     <testcase classname="calculations utility functions calculateWPM should calculate WPM for 30 seconds" name="calculations utility functions calculateWPM should calculate WPM for 30 seconds" time="0">
     </testcase>
@@ -157,7 +203,7 @@
     </testcase>
     <testcase classname="calculations utility functions calculateAccuracy should calculate 100% accuracy when all chars are correct" name="calculations utility functions calculateAccuracy should calculate 100% accuracy when all chars are correct" time="0">
     </testcase>
-    <testcase classname="calculations utility functions calculateAccuracy should calculate partial accuracy correctly" name="calculations utility functions calculateAccuracy should calculate partial accuracy correctly" time="0.001">
+    <testcase classname="calculations utility functions calculateAccuracy should calculate partial accuracy correctly" name="calculations utility functions calculateAccuracy should calculate partial accuracy correctly" time="0">
     </testcase>
     <testcase classname="calculations utility functions calculateAccuracy should round to nearest integer" name="calculations utility functions calculateAccuracy should round to nearest integer" time="0">
     </testcase>
@@ -167,13 +213,13 @@
     </testcase>
     <testcase classname="calculations utility functions calculateProgress should handle when current exceeds target" name="calculations utility functions calculateProgress should handle when current exceeds target" time="0">
     </testcase>
-    <testcase classname="calculations utility functions countCorrectChars should count all correct chars when input matches" name="calculations utility functions countCorrectChars should count all correct chars when input matches" time="0.002">
+    <testcase classname="calculations utility functions countCorrectChars should count all correct chars when input matches" name="calculations utility functions countCorrectChars should count all correct chars when input matches" time="0">
     </testcase>
     <testcase classname="calculations utility functions countCorrectChars should count partial correct chars" name="calculations utility functions countCorrectChars should count partial correct chars" time="0">
     </testcase>
-    <testcase classname="calculations utility functions countCorrectChars should return 0 when no chars match" name="calculations utility functions countCorrectChars should return 0 when no chars match" time="0.001">
+    <testcase classname="calculations utility functions countCorrectChars should return 0 when no chars match" name="calculations utility functions countCorrectChars should return 0 when no chars match" time="0">
     </testcase>
-    <testcase classname="calculations utility functions countCorrectChars should handle empty input" name="calculations utility functions countCorrectChars should handle empty input" time="0">
+    <testcase classname="calculations utility functions countCorrectChars should handle empty input" name="calculations utility functions countCorrectChars should handle empty input" time="0.001">
     </testcase>
     <testcase classname="calculations utility functions countCorrectChars should handle shorter input than target" name="calculations utility functions countCorrectChars should handle shorter input than target" time="0">
     </testcase>
@@ -181,89 +227,43 @@
     </testcase>
     <testcase classname="calculations utility functions isCharCorrect should return false when char does not match" name="calculations utility functions isCharCorrect should return false when char does not match" time="0">
     </testcase>
-    <testcase classname="calculations utility functions isCharCorrect should handle undefined for out of bounds" name="calculations utility functions isCharCorrect should handle undefined for out of bounds" time="0.001">
+    <testcase classname="calculations utility functions isCharCorrect should handle undefined for out of bounds" name="calculations utility functions isCharCorrect should handle undefined for out of bounds" time="0">
     </testcase>
-    <testcase classname="calculations utility functions getCharStatus should return pending when index is beyond user input" name="calculations utility functions getCharStatus should return pending when index is beyond user input" time="0">
+    <testcase classname="calculations utility functions getCharStatus should return pending when index is beyond user input" name="calculations utility functions getCharStatus should return pending when index is beyond user input" time="0.003">
     </testcase>
-    <testcase classname="calculations utility functions getCharStatus should return correct when char matches" name="calculations utility functions getCharStatus should return correct when char matches" time="0">
+    <testcase classname="calculations utility functions getCharStatus should return correct when char matches" name="calculations utility functions getCharStatus should return correct when char matches" time="0.001">
     </testcase>
     <testcase classname="calculations utility functions getCharStatus should return incorrect when char does not match" name="calculations utility functions getCharStatus should return incorrect when char does not match" time="0">
     </testcase>
-    <testcase classname="calculations utility functions getCharStatus should handle empty input" name="calculations utility functions getCharStatus should handle empty input" time="0">
+    <testcase classname="calculations utility functions getCharStatus should handle empty input" name="calculations utility functions getCharStatus should handle empty input" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="GameState Integration" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:33:52" time="0.267" tests="13">
-    <testcase classname="GameState Integration Game lifecycle should start in initial state" name="GameState Integration Game lifecycle should start in initial state" time="0.005">
-    </testcase>
-    <testcase classname="GameState Integration Game lifecycle should transition to playing state when game starts" name="GameState Integration Game lifecycle should transition to playing state when game starts" time="0.002">
-    </testcase>
-    <testcase classname="GameState Integration Game lifecycle should transition to finished state when game finishes" name="GameState Integration Game lifecycle should transition to finished state when game finishes" time="0.001">
-    </testcase>
-    <testcase classname="GameState Integration Game lifecycle should reset to initial state on reset" name="GameState Integration Game lifecycle should reset to initial state on reset" time="0.002">
-    </testcase>
-    <testcase classname="GameState Integration Input handling should not accept input before game starts" name="GameState Integration Input handling should not accept input before game starts" time="0.001">
-    </testcase>
-    <testcase classname="GameState Integration Input handling should accept input when game is playing" name="GameState Integration Input handling should accept input when game is playing" time="0">
-    </testcase>
-    <testcase classname="GameState Integration Input handling should not accept input longer than target text" name="GameState Integration Input handling should not accept input longer than target text" time="0.001">
-    </testcase>
-    <testcase classname="GameState Integration Statistics calculation should calculate correct accuracy" name="GameState Integration Statistics calculation should calculate correct accuracy" time="0.001">
-    </testcase>
-    <testcase classname="GameState Integration Statistics calculation should calculate progress correctly" name="GameState Integration Statistics calculation should calculate progress correctly" time="0.001">
-    </testcase>
-    <testcase classname="GameState Integration Statistics calculation should detect completion" name="GameState Integration Statistics calculation should detect completion" time="0.001">
-    </testcase>
-    <testcase classname="GameState Integration Streak tracking should increment streak for correct characters" name="GameState Integration Streak tracking should increment streak for correct characters" time="0.001">
-    </testcase>
-    <testcase classname="GameState Integration Streak tracking should reset streak on incorrect character" name="GameState Integration Streak tracking should reset streak on incorrect character" time="0">
-    </testcase>
-    <testcase classname="GameState Integration Streak tracking should track maximum streak" name="GameState Integration Streak tracking should track maximum streak" time="0.001">
-    </testcase>
-  </testsuite>
-  <testsuite name="GameArea Integration" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:33:52" time="0.886" tests="8">
-    <testcase classname="GameArea Integration Character rendering and status should render all characters as pending initially" name="GameArea Integration Character rendering and status should render all characters as pending initially" time="0.017">
-    </testcase>
-    <testcase classname="GameArea Integration Character rendering and status should mark correct characters with correct status" name="GameArea Integration Character rendering and status should mark correct characters with correct status" time="0.002">
-    </testcase>
-    <testcase classname="GameArea Integration Character rendering and status should mark incorrect characters with incorrect status" name="GameArea Integration Character rendering and status should mark incorrect characters with incorrect status" time="0.002">
-    </testcase>
-    <testcase classname="GameArea Integration Character rendering and status should show cursor at current typing position" name="GameArea Integration Character rendering and status should show cursor at current typing position" time="0.001">
-    </testcase>
-    <testcase classname="GameArea Integration Input handling should call onInputChange when user types" name="GameArea Integration Input handling should call onInputChange when user types" time="0.004">
-    </testcase>
-    <testcase classname="GameArea Integration Input handling should call onInputChange for each character typed" name="GameArea Integration Input handling should call onInputChange for each character typed" time="0.003">
-    </testcase>
-    <testcase classname="GameArea Integration Input handling should disable input when disabled prop is true" name="GameArea Integration Input handling should disable input when disabled prop is true" time="0.002">
-    </testcase>
-    <testcase classname="GameArea Integration Completion flow should mark all characters as correct when text is complete" name="GameArea Integration Completion flow should mark all characters as correct when text is complete" time="0.004">
-    </testcase>
-  </testsuite>
-  <testsuite name="TypeRacer Integration" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:33:50" time="2.566" tests="13">
-    <testcase classname="TypeRacer Integration Initial render should render the app header" name="TypeRacer Integration Initial render should render the app header" time="0.035">
+  <testsuite name="TypeRacer Integration" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:36:04" time="1.761" tests="13">
+    <testcase classname="TypeRacer Integration Initial render should render the app header" name="TypeRacer Integration Initial render should render the app header" time="0.067">
     </testcase>
     <testcase classname="TypeRacer Integration Initial render should render difficulty buttons" name="TypeRacer Integration Initial render should render difficulty buttons" time="0.016">
     </testcase>
-    <testcase classname="TypeRacer Integration Initial render should render the game area with target text" name="TypeRacer Integration Initial render should render the game area with target text" time="0.008">
+    <testcase classname="TypeRacer Integration Initial render should render the game area with target text" name="TypeRacer Integration Initial render should render the game area with target text" time="0.012">
     </testcase>
-    <testcase classname="TypeRacer Integration Initial render should have dark mode toggle" name="TypeRacer Integration Initial render should have dark mode toggle" time="0.008">
+    <testcase classname="TypeRacer Integration Initial render should have dark mode toggle" name="TypeRacer Integration Initial render should have dark mode toggle" time="0.032">
     </testcase>
-    <testcase classname="TypeRacer Integration Initial render should have sound toggle" name="TypeRacer Integration Initial render should have sound toggle" time="0.018">
+    <testcase classname="TypeRacer Integration Initial render should have sound toggle" name="TypeRacer Integration Initial render should have sound toggle" time="0.01">
     </testcase>
-    <testcase classname="TypeRacer Integration Difficulty selection should change target text when difficulty changes" name="TypeRacer Integration Difficulty selection should change target text when difficulty changes" time="0.024">
+    <testcase classname="TypeRacer Integration Difficulty selection should change target text when difficulty changes" name="TypeRacer Integration Difficulty selection should change target text when difficulty changes" time="0.021">
     </testcase>
-    <testcase classname="TypeRacer Integration Difficulty selection should highlight selected difficulty" name="TypeRacer Integration Difficulty selection should highlight selected difficulty" time="0.032">
+    <testcase classname="TypeRacer Integration Difficulty selection should highlight selected difficulty" name="TypeRacer Integration Difficulty selection should highlight selected difficulty" time="0.036">
     </testcase>
-    <testcase classname="TypeRacer Integration Game flow should start game when user begins typing" name="TypeRacer Integration Game flow should start game when user begins typing" time="0.054">
+    <testcase classname="TypeRacer Integration Game flow should start game when user begins typing" name="TypeRacer Integration Game flow should start game when user begins typing" time="0.072">
     </testcase>
-    <testcase classname="TypeRacer Integration Game flow should update progress as user types" name="TypeRacer Integration Game flow should update progress as user types" time="0.027">
+    <testcase classname="TypeRacer Integration Game flow should update progress as user types" name="TypeRacer Integration Game flow should update progress as user types" time="0.032">
     </testcase>
-    <testcase classname="TypeRacer Integration Game flow should show restart button while playing" name="TypeRacer Integration Game flow should show restart button while playing" time="0.018">
+    <testcase classname="TypeRacer Integration Game flow should show restart button while playing" name="TypeRacer Integration Game flow should show restart button while playing" time="0.028">
     </testcase>
-    <testcase classname="TypeRacer Integration Settings should toggle dark mode" name="TypeRacer Integration Settings should toggle dark mode" time="0.014">
+    <testcase classname="TypeRacer Integration Settings should toggle dark mode" name="TypeRacer Integration Settings should toggle dark mode" time="0.009">
     </testcase>
-    <testcase classname="TypeRacer Integration Settings should toggle sound" name="TypeRacer Integration Settings should toggle sound" time="0.008">
+    <testcase classname="TypeRacer Integration Settings should toggle sound" name="TypeRacer Integration Settings should toggle sound" time="0.007">
     </testcase>
-    <testcase classname="TypeRacer Integration Settings should persist dark mode preference" name="TypeRacer Integration Settings should persist dark mode preference" time="0.009">
+    <testcase classname="TypeRacer Integration Settings should persist dark mode preference" name="TypeRacer Integration Settings should persist dark mode preference" time="0.011">
     </testcase>
   </testsuite>
 </testsuites>

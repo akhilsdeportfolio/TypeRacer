@@ -5,7 +5,7 @@ const webpack = require("webpack");
 const TerserWebpackPlugin = require("terser-webpack-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
-const { BrotliCompressPlugin } = require("brotli-webpack-plugin");
+const BrotliPlugin = require("brotli-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
 module.exports = function(_env, argv) {
@@ -99,16 +99,21 @@ module.exports = function(_env, argv) {
       }),
       // Gzip compression
       isProduction &&
+        process.env.ENABLE_COMPRESSION !== "false" &&
         new CompressionPlugin({
-          filename: "[path][base].gz",
+          filename: "[path].gz[query]",
           algorithm: "gzip",
           test: /\.(js|css|html|svg)$/,
           threshold: 8192,
-          minRatio: 0.8
+          minRatio: 0.8,
+          compressionOptions: {
+            level: 9
+          }
         }),
       // Brotli compression (better than gzip)
       isProduction &&
-        new BrotliCompressPlugin({
+        process.env.ENABLE_COMPRESSION !== "false" &&
+        new BrotliPlugin({
           asset: "[path].br[query]",
           test: /\.(js|css|html|svg)$/,
           threshold: 8192,
@@ -210,7 +215,7 @@ module.exports = function(_env, argv) {
       runtimeChunk: {
         name: "runtime"
       },
-      moduleIds: "deterministic",
+      moduleIds: "hashed",
       usedExports: true,
       sideEffects: true
     },

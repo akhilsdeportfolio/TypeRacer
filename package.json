@@ -10,6 +10,7 @@
     "build:optimized": "OUTPUT_DIR=dist NODE_OPTIONS=--openssl-legacy-provider webpack --mode production",
     "build:unoptimized": "OUTPUT_DIR=dist-unoptimized ENABLE_COMPRESSION=false NODE_OPTIONS=--openssl-legacy-provider webpack --mode production",
     "build:gh-pages": "OUTPUT_DIR=dist-unoptimized ENABLE_COMPRESSION=false PUBLIC_PATH=/TypeRacer/ NODE_OPTIONS=--openssl-legacy-provider webpack --mode production",
+    "build:surge": "OUTPUT_DIR=dist-surge ENABLE_COMPRESSION=false NODE_OPTIONS=--openssl-legacy-provider webpack --mode production",
     "build:all": "yarn build:optimized && yarn build:unoptimized",
     "build:prod": "NODE_ENV=production NODE_OPTIONS=--openssl-legacy-provider webpack --mode production",
     "build:analyze": "ANALYZE=true NODE_OPTIONS=--openssl-legacy-provider webpack --mode production",

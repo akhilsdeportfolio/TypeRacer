@@ -1,4 +1,4 @@
-# Deploy to Firebase Hosting and GitHub Pages
+# Deploy to Firebase Hosting and Surge.sh
 name: Build and Deploy
 
 'on':
@@ -7,11 +7,8 @@ name: Build and Deploy
       - main
   workflow_dispatch:
 
-# Permissions for GitHub Pages deployment
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 # Cancel in-progress runs for the same branch
 concurrency:
@@ -163,47 +160,31 @@ jobs:
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
-      - name: Build for GitHub Pages (no compression)
-        run: yarn build:gh-pages
+      - name: Build for Surge (no compression)
+        run: yarn build:surge
 
-      - name: Add 404.html for SPA routing
-        run: cp dist-unoptimized/index.html dist-unoptimized/404.html
+      - name: Add 200.html for SPA routing (Surge)
+        run: cp dist-surge/index.html dist-surge/200.html
 
-      - name: Setup GitHub Pages
-        uses: actions/configure-pages@v4
+      - name: Install Surge CLI
+        run: npm install -g surge
 
-      - name: Upload GitHub Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: './dist-unoptimized'
+      - name: Deploy to Surge (truly uncompressed)
+        run: surge ./dist-surge typeracer-uncompressed.surge.sh --token $SURGE_TOKEN
+        env:
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
 
       - name: Deployment summary
         run: |
-          echo "✅ Firebase Deployment successful!"
+          echo "✅ All Deployments successful!"
           echo ""
-          echo "🚀 Optimized (with compression):"
+          echo "🚀 Optimized (with webpack compression):"
           echo "   https://typeracer-optimized.web.app"
           echo ""
-          echo "📦 Unoptimized (no compression):"
+          echo "📦 Unoptimized (Firebase CDN still compresses):"
           echo "   https://typeracer-unoptimized.web.app"
           echo ""
-          echo "📊 Check Firebase Console for analytics"
-
-  # Deploy to GitHub Pages (runs after build_and_deploy)
-  deploy_github_pages:
-    needs: build_and_deploy
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-
-      - name: GitHub Pages deployment summary
-        run: |
-          echo "✅ GitHub Pages Deployment successful!"
+          echo "� Truly Uncompressed (Surge - no compression):"
+          echo "   https://typeracer-uncompressed.surge.sh"
           echo ""
-          echo "🌐 Uncompressed version (no CDN compression):"
-          echo "   https://akhilsdeportfolio.github.io/TypeRacer/"
+          echo "📊 Use the Surge URL for baseline performance testing"

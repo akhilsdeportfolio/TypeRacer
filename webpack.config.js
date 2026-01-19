@@ -16,12 +16,13 @@ const BundleAnalyzerPlugin = shouldAnalyze ? require("webpack-bundle-analyzer").
 module.exports = function(_env, argv) {
   const isProduction = argv.mode === "production";
   const isDevelopment = !isProduction;
+  const outputDir = process.env.OUTPUT_DIR || "dist";
 
   return {
     devtool: isDevelopment && "cheap-module-source-map",
     entry: "./src/index.js",
     output: {
-      path: path.resolve(__dirname, "dist"),
+      path: path.resolve(__dirname, outputDir),
       filename: "assets/js/[name].[contenthash:8].js",
       publicPath: "/"
     },

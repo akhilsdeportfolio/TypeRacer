@@ -1,6 +1,14 @@
 {
   "projects": {
     "default": "fronten-prepp"
+  },
+  "targets": {
+    "fronten-prepp": {
+      "hosting": {
+        "optimized": ["typeracer-optimized"],
+        "unoptimized": ["typeracer-unoptimized"]
+      }
+    }
   }
 }
 

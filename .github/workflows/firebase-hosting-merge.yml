@@ -122,31 +122,50 @@ jobs:
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: yarn install --immutable
 
-      - name: Build production bundle
-        run: yarn build:prod
+      - name: Build optimized bundle (with compression)
+        run: yarn build:optimized
 
-      - name: Display bundle size
+      - name: Build unoptimized bundle (no compression)
+        run: yarn build:unoptimized
+
+      - name: Display bundle size comparison
         run: |
           echo "📦 Bundle Size Report:"
+          echo ""
+          echo "🚀 OPTIMIZED (with compression):"
           du -sh dist/
-          echo ""
-          echo "📄 File Sizes:"
-          find dist -type f \( -name "*.js" -o -name "*.css" \) | head -20 | xargs ls -lh 2>/dev/null || echo "No JS/CSS files found"
-          echo ""
+          echo "📄 JS/CSS Files:"
+          find dist -type f \( -name "*.js" -o -name "*.css" \) | head -10 | xargs ls -lh 2>/dev/null || echo "No JS/CSS files found"
           echo "🗜️ Compressed Files:"
-          find dist -type f \( -name "*.gz" -o -name "*.br" \) | head -20 | xargs ls -lh 2>/dev/null || echo "No compressed files found"
+          find dist -type f \( -name "*.gz" -o -name "*.br" \) | head -10 | xargs ls -lh 2>/dev/null || echo "No compressed files found"
+          echo ""
+          echo "� UNOPTIMIZED (no compression):"
+          du -sh dist-unoptimized/
+          echo "📄 JS/CSS Files:"
+          find dist-unoptimized -type f \( -name "*.js" -o -name "*.css" \) | head -10 | xargs ls -lh 2>/dev/null || echo "No JS/CSS files found"
 
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
 
-      - name: Deploy to Firebase Hosting
-        run: firebase deploy --only hosting --project fronten-prepp --token "$FIREBASE_TOKEN"
+      - name: Deploy optimized to Firebase
+        run: firebase deploy --only hosting:optimized --project fronten-prepp --token "$FIREBASE_TOKEN"
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
+      - name: Deploy unoptimized to Firebase
+        run: firebase deploy --only hosting:unoptimized --project fronten-prepp --token "$FIREBASE_TOKEN"
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
       - name: Deployment summary
         run: |
           echo "✅ Deployment successful!"
-          echo "🌐 Live URL: https://fronten-prepp.web.app"
+          echo ""
+          echo "🚀 Optimized (with compression):"
+          echo "   https://typeracer-optimized.web.app"
+          echo ""
+          echo "📦 Unoptimized (no compression):"
+          echo "   https://typeracer-unoptimized.web.app"
+          echo ""
           echo "📊 Check Firebase Console for analytics"
 

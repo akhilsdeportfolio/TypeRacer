@@ -80,24 +80,37 @@ The application will open at `http://localhost:8080/`
 ```bash
 # Create production build
 yarn build
+
+# Or build and deploy in one command
+yarn deploy:prod
+```
+
+### Test Production Build Locally
+
+```bash
+# Build and serve with Firebase emulator
+yarn serve:build
+
+# Visit http://localhost:5000
 ```
 
 ### Deploy to Firebase Hosting
 
 ```bash
-# Install Firebase CLI globally
-npm install -g firebase-tools
+# One-command deployment (recommended)
+yarn deploy:prod
 
-# Login to Firebase
-firebase login
+# Or deploy existing build
+yarn deploy
 
-# Deploy to Firebase Hosting
-firebase deploy --only hosting
+# Or deploy to preview channel
+yarn preview
 ```
 
 **Automatic Deployment:** This project is configured with GitHub Actions for automatic deployment to Firebase Hosting on every push to `main` branch.
 
 See [FIREBASE_SETUP.md](./FIREBASE_SETUP.md) for complete setup instructions.
+See [SCRIPTS.md](./SCRIPTS.md) for all available scripts.
 
 ---
 

@@ -21,6 +21,9 @@ Visit: `http://localhost:8080/`
 ```bash
 # Create production build
 yarn build
+
+# Or test production build locally
+yarn serve:build
 ```
 
 Output: `dist/` folder
@@ -30,14 +33,12 @@ Output: `dist/` folder
 ### 3️⃣ **Deploy to Firebase**
 
 ```bash
-# Install Firebase CLI
-npm install -g firebase-tools
+# One-command deployment (recommended)
+yarn deploy:prod
 
-# Login to Firebase
-firebase login
-
-# Deploy
-firebase deploy --only hosting
+# Or manual steps
+yarn build
+yarn deploy
 ```
 
 ---
@@ -75,24 +76,30 @@ firebase deploy --only hosting
 
 ```bash
 # Development
-yarn start              # Start dev server
+yarn start              # Start dev server (localhost:8080)
 yarn build              # Build for production
 
-# Firebase
-firebase login          # Login to Firebase
-firebase init           # Initialize Firebase
-firebase serve          # Test locally (port 5000)
-firebase deploy         # Deploy to hosting
+# Testing Production Build
+yarn serve:build        # Build and serve locally (localhost:5000)
+yarn test:local         # Build and serve on port 5002
+
+# Deployment
+yarn deploy:prod        # Build and deploy (recommended)
+yarn deploy             # Deploy existing build
+yarn preview            # Deploy to preview channel
+
+# Maintenance
+yarn clean              # Remove dist/ folder
+yarn rebuild            # Clean and rebuild
 
 # Git
 git status              # Check status
 git add .               # Stage all changes
 git commit -m "msg"     # Commit changes
 git push origin main    # Push to GitHub (triggers auto-deploy)
-
-# View logs
-firebase hosting:channel:list    # List all hosting channels
 ```
+
+**See [SCRIPTS.md](./SCRIPTS.md) for complete scripts documentation.**
 
 ---
 

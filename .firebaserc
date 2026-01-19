@@ -5,9 +5,9 @@
   "targets": {
     "fronten-prepp": {
       "hosting": {
-        "dev": ["typeracer-dev"],
-        "stage": ["typeracer-stage"],
-        "prod": ["typeracer-prod"]
+        "dev": ["fronten-prepp-dev"],
+        "stage": ["fronten-prepp-stage"],
+        "prod": ["fronten-prepp-prod"]
       }
     }
   }

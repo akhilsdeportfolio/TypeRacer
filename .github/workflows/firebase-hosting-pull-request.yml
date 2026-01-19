@@ -57,15 +57,18 @@ jobs:
           echo "🗜️ Compressed Files:"
           find dist -type f -name "*.gz" -o -name "*.br" | xargs ls -lh
 
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
       - name: Deploy to Firebase Hosting Preview Channel
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
-          projectId: fronten-prepp
+        run: |
+          CHANNEL_ID="pr-${{ github.event.pull_request.number }}"
+          firebase hosting:channel:deploy $CHANNEL_ID --project fronten-prepp --expires 7d
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
       - name: Preview deployment summary
         run: |
           echo "✅ Preview deployment successful!"
-          echo "👀 Check the PR comment for the preview URL"
+          echo "🔗 Preview URL: https://fronten-prepp--pr-${{ github.event.pull_request.number }}.web.app"
 

@@ -28,11 +28,25 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
           cache: 'yarn'
 
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Prepare Yarn
+        run: corepack prepare yarn@4.9.2 --activate
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        id: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
+
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: yarn install --immutable
 
       - name: Build for GitHub Pages (no compression)
         run: yarn build:gh-pages

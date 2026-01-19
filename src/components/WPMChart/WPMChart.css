@@ -1,0 +1,60 @@
+/* WPM Chart Styles */
+
+.wpm-chart {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 1.5rem;
+  color: white;
+}
+
+.wpm-chart--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.wpm-chart__title {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.wpm-chart__svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.wpm-chart__label {
+  fill: rgba(255, 255, 255, 0.6);
+  font-size: 11px;
+  text-anchor: end;
+}
+
+.wpm-chart__point {
+  transition: r 0.2s;
+}
+
+.wpm-chart__point-group:hover .wpm-chart__point {
+  r: 6;
+}
+
+.wpm-chart__stats {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.wpm-chart__stats span:first-child {
+  color: #10b981;
+  font-weight: 600;
+}
+

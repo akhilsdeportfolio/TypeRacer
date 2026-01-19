@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="84" failures="0" errors="0" time="2.631">
+  <testsuite name="calculations utility functions" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:22:06" time="1.156" tests="24">
+    <testcase classname="calculations utility functions calculateWPM should return 0 when time is 0 or negative" name="calculations utility functions calculateWPM should return 0 when time is 0 or negative" time="0.003">
+    </testcase>
+    <testcase classname="calculations utility functions calculateWPM should calculate WPM correctly" name="calculations utility functions calculateWPM should calculate WPM correctly" time="0">
+    </testcase>
+    <testcase classname="calculations utility functions calculateWPM should calculate WPM for 30 seconds" name="calculations utility functions calculateWPM should calculate WPM for 30 seconds" time="0">
+    </testcase>
+    <testcase classname="calculations utility functions calculateWPM should round WPM to nearest integer" name="calculations utility functions calculateWPM should round WPM to nearest integer" time="0">
+    </testcase>
+    <testcase classname="calculations utility functions calculateWPM should handle large values" name="calculations utility functions calculateWPM should handle large values" time="0.001">
+    </testcase>
+    <testcase classname="calculations utility functions calculateAccuracy should return 0 when total chars is 0 or negative" name="calculations utility functions calculateAccuracy should return 0 when total chars is 0 or negative" time="0">
+    </testcase>
+    <testcase classname="calculations utility functions calculateAccuracy should calculate 100% accuracy when all chars are correct" name="calculations utility functions calculateAccuracy should calculate 100% accuracy when all chars are correct" time="0.001">
+    </testcase>
+    <testcase classname="calculations utility functions calculateAccuracy should calculate partial accuracy correctly" name="calculations utility functions calculateAccuracy should calculate partial accuracy correctly" time="0">
+    </testcase>
+    <testcase classname="calculations utility functions calculateAccuracy should round to nearest integer" name="calculations utility functions calculateAccuracy should round to nearest integer" time="0.001">
+    </testcase>
+    <testcase classname="calculations utility functions calculateProgress should return 0 when target length is 0 or negative" name="calculations utility functions calculateProgress should return 0 when target length is 0 or negative" time="0">
+    </testcase>
+    <testcase classname="calculations utility functions calculateProgress should calculate progress correctly" name="calculations utility functions calculateProgress should calculate progress correctly" time="0.001">
+    </testcase>
+    <testcase classname="calculations utility functions calculateProgress should handle when current exceeds target" name="calculations utility functions calculateProgress should handle when current exceeds target" time="0">
+    </testcase>
+    <testcase classname="calculations utility functions countCorrectChars should count all correct chars when input matches" name="calculations utility functions countCorrectChars should count all correct chars when input matches" time="0">
+    </testcase>
+    <testcase classname="calculations utility functions countCorrectChars should count partial correct chars" name="calculations utility functions countCorrectChars should count partial correct chars" time="0">
+    </testcase>
+    <testcase classname="calculations utility functions countCorrectChars should return 0 when no chars match" name="calculations utility functions countCorrectChars should return 0 when no chars match" time="0">
+    </testcase>
+    <testcase classname="calculations utility functions countCorrectChars should handle empty input" name="calculations utility functions countCorrectChars should handle empty input" time="0.001">
+    </testcase>
+    <testcase classname="calculations utility functions countCorrectChars should handle shorter input than target" name="calculations utility functions countCorrectChars should handle shorter input than target" time="0">
+    </testcase>
+    <testcase classname="calculations utility functions isCharCorrect should return true when char matches" name="calculations utility functions isCharCorrect should return true when char matches" time="0">
+    </testcase>
+    <testcase classname="calculations utility functions isCharCorrect should return false when char does not match" name="calculations utility functions isCharCorrect should return false when char does not match" time="0">
+    </testcase>
+    <testcase classname="calculations utility functions isCharCorrect should handle undefined for out of bounds" name="calculations utility functions isCharCorrect should handle undefined for out of bounds" time="0">
+    </testcase>
+    <testcase classname="calculations utility functions getCharStatus should return pending when index is beyond user input" name="calculations utility functions getCharStatus should return pending when index is beyond user input" time="0.001">
+    </testcase>
+    <testcase classname="calculations utility functions getCharStatus should return correct when char matches" name="calculations utility functions getCharStatus should return correct when char matches" time="0">
+    </testcase>
+    <testcase classname="calculations utility functions getCharStatus should return incorrect when char does not match" name="calculations utility functions getCharStatus should return incorrect when char does not match" time="0">
+    </testcase>
+    <testcase classname="calculations utility functions getCharStatus should handle empty input" name="calculations utility functions getCharStatus should handle empty input" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="useLocalStorage hook" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:22:06" time="1.209" tests="9">
+    <testcase classname="useLocalStorage hook useLocalStorage should return initial value when localStorage is empty" name="useLocalStorage hook useLocalStorage should return initial value when localStorage is empty" time="0.009">
+    </testcase>
+    <testcase classname="useLocalStorage hook useLocalStorage should return value from localStorage if it exists" name="useLocalStorage hook useLocalStorage should return value from localStorage if it exists" time="0.001">
+    </testcase>
+    <testcase classname="useLocalStorage hook useLocalStorage should update localStorage when setValue is called" name="useLocalStorage hook useLocalStorage should update localStorage when setValue is called" time="0.004">
+    </testcase>
+    <testcase classname="useLocalStorage hook useLocalStorage should handle function updates like useState" name="useLocalStorage hook useLocalStorage should handle function updates like useState" time="0.001">
+    </testcase>
+    <testcase classname="useLocalStorage hook useLocalStorage should handle objects and arrays" name="useLocalStorage hook useLocalStorage should handle objects and arrays" time="0.001">
+    </testcase>
+    <testcase classname="useLocalStorage hook useLocalStorageBoolean should return initial value when localStorage is empty" name="useLocalStorage hook useLocalStorageBoolean should return initial value when localStorage is empty" time="0.002">
+    </testcase>
+    <testcase classname="useLocalStorage hook useLocalStorageBoolean should parse true from localStorage" name="useLocalStorage hook useLocalStorageBoolean should parse true from localStorage" time="0.001">
+    </testcase>
+    <testcase classname="useLocalStorage hook useLocalStorageBoolean should parse false from localStorage" name="useLocalStorage hook useLocalStorageBoolean should parse false from localStorage" time="0.001">
+    </testcase>
+    <testcase classname="useLocalStorage hook useLocalStorageBoolean should toggle boolean values" name="useLocalStorage hook useLocalStorageBoolean should toggle boolean values" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="useTimer hook" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:22:06" time="1.264" tests="6">
+    <testcase classname="useTimer hook should initialize with the allowed time" name="useTimer hook should initialize with the allowed time" time="0.012">
+    </testcase>
+    <testcase classname="useTimer hook should start counting down when startTimer is called" name="useTimer hook should start counting down when startTimer is called" time="0.038">
+    </testcase>
+    <testcase classname="useTimer hook should call onFinish when time reaches 0" name="useTimer hook should call onFinish when time reaches 0" time="0.002">
+    </testcase>
+    <testcase classname="useTimer hook should reset timer to initial value" name="useTimer hook should reset timer to initial value" time="0.002">
+    </testcase>
+    <testcase classname="useTimer hook should not start multiple timers" name="useTimer hook should not start multiple timers" time="0.005">
+    </testcase>
+    <testcase classname="useTimer hook should update time when allowedTime prop changes" name="useTimer hook should update time when allowedTime prop changes" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="Character component" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:22:06" time="1.522" tests="10">
+    <testcase classname="Character component should render the character" name="Character component should render the character" time="0.02">
+    </testcase>
+    <testcase classname="Character component should render space character" name="Character component should render space character" time="0.004">
+    </testcase>
+    <testcase classname="Character component should apply pending status by default" name="Character component should apply pending status by default" time="0.003">
+    </testcase>
+    <testcase classname="Character component should apply correct status class" name="Character component should apply correct status class" time="0.001">
+    </testcase>
+    <testcase classname="Character component should apply incorrect status class" name="Character component should apply incorrect status class" time="0.003">
+    </testcase>
+    <testcase classname="Character component should apply cursor class when isCursor is true" name="Character component should apply cursor class when isCursor is true" time="0.002">
+    </testcase>
+    <testcase classname="Character component should not apply cursor class when isCursor is false" name="Character component should not apply cursor class when isCursor is false" time="0.001">
+    </testcase>
+    <testcase classname="Character component should apply custom className" name="Character component should apply custom className" time="0.001">
+    </testcase>
+    <testcase classname="Character component should combine all classes correctly" name="Character component should combine all classes correctly" time="0.002">
+    </testcase>
+    <testcase classname="Character component should render special characters" name="Character component should render special characters" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="StatCard component" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:22:06" time="1.538" tests="12">
+    <testcase classname="StatCard component should render label and value" name="StatCard component should render label and value" time="0.024">
+    </testcase>
+    <testcase classname="StatCard component should render string value" name="StatCard component should render string value" time="0.003">
+    </testcase>
+    <testcase classname="StatCard component should render icon when provided" name="StatCard component should render icon when provided" time="0.004">
+    </testcase>
+    <testcase classname="StatCard component should not render icon when not provided" name="StatCard component should not render icon when not provided" time="0.003">
+    </testcase>
+    <testcase classname="StatCard component should apply default variant class" name="StatCard component should apply default variant class" time="0.003">
+    </testcase>
+    <testcase classname="StatCard component should apply highlight variant class" name="StatCard component should apply highlight variant class" time="0.001">
+    </testcase>
+    <testcase classname="StatCard component should apply success variant class" name="StatCard component should apply success variant class" time="0.001">
+    </testcase>
+    <testcase classname="StatCard component should apply warning variant class" name="StatCard component should apply warning variant class" time="0.001">
+    </testcase>
+    <testcase classname="StatCard component should apply custom className" name="StatCard component should apply custom className" time="0.001">
+    </testcase>
+    <testcase classname="StatCard component should render content structure correctly" name="StatCard component should render content structure correctly" time="0.002">
+    </testcase>
+    <testcase classname="StatCard component should handle zero value" name="StatCard component should handle zero value" time="0.002">
+    </testcase>
+    <testcase classname="StatCard component should handle large numbers" name="StatCard component should handle large numbers" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="Button component" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:22:06" time="1.538" tests="12">
+    <testcase classname="Button component should render with children" name="Button component should render with children" time="0.021">
+    </testcase>
+    <testcase classname="Button component should call onClick when clicked" name="Button component should call onClick when clicked" time="0.006">
+    </testcase>
+    <testcase classname="Button component should be disabled when disabled prop is true" name="Button component should be disabled when disabled prop is true" time="0.003">
+    </testcase>
+    <testcase classname="Button component should not call onClick when disabled" name="Button component should not call onClick when disabled" time="0.003">
+    </testcase>
+    <testcase classname="Button component should apply primary variant class by default" name="Button component should apply primary variant class by default" time="0.004">
+    </testcase>
+    <testcase classname="Button component should apply secondary variant class" name="Button component should apply secondary variant class" time="0.001">
+    </testcase>
+    <testcase classname="Button component should apply icon variant class" name="Button component should apply icon variant class" time="0.001">
+    </testcase>
+    <testcase classname="Button component should apply size classes" name="Button component should apply size classes" time="0.004">
+    </testcase>
+    <testcase classname="Button component should apply custom className" name="Button component should apply custom className" time="0.002">
+    </testcase>
+    <testcase classname="Button component should render with title attribute" name="Button component should render with title attribute" time="0.001">
+    </testcase>
+    <testcase classname="Button component should have correct button type" name="Button component should have correct button type" time="0.005">
+    </testcase>
+    <testcase classname="Button component should default to type button" name="Button component should default to type button" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="ProgressBar component" errors="0" failures="0" skipped="0" timestamp="2026-01-19T17:22:06" time="1.554" tests="11">
+    <testcase classname="ProgressBar component should render with default progress of 0" name="ProgressBar component should render with default progress of 0" time="0.023">
+    </testcase>
+    <testcase classname="ProgressBar component should display the correct progress percentage" name="ProgressBar component should display the correct progress percentage" time="0.004">
+    </testcase>
+    <testcase classname="ProgressBar component should clamp progress to 100 when exceeding" name="ProgressBar component should clamp progress to 100 when exceeding" time="0.003">
+    </testcase>
+    <testcase classname="ProgressBar component should clamp progress to 0 when negative" name="ProgressBar component should clamp progress to 0 when negative" time="0.002">
+    </testcase>
+    <testcase classname="ProgressBar component should hide label when showLabel is false" name="ProgressBar component should hide label when showLabel is false" time="0.001">
+    </testcase>
+    <testcase classname="ProgressBar component should apply default variant class" name="ProgressBar component should apply default variant class" time="0.002">
+    </testcase>
+    <testcase classname="ProgressBar component should apply success variant class" name="ProgressBar component should apply success variant class" time="0.002">
+    </testcase>
+    <testcase classname="ProgressBar component should apply warning variant class" name="ProgressBar component should apply warning variant class" time="0.001">
+    </testcase>
+    <testcase classname="ProgressBar component should apply custom className" name="ProgressBar component should apply custom className" time="0.001">
+    </testcase>
+    <testcase classname="ProgressBar component should set fill width based on progress" name="ProgressBar component should set fill width based on progress" time="0.031">
+    </testcase>
+    <testcase classname="ProgressBar component should render track element" name="ProgressBar component should render track element" time="0.001">
+    </testcase>
+  </testsuite>
+</testsuites>

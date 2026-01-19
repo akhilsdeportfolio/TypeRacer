@@ -26,6 +26,12 @@ module.exports = {
         "@babel/plugin-transform-react-inline-elements",
         "@babel/plugin-transform-react-constant-elements"
       ]
+    },
+    test: {
+      presets: [
+        ["@babel/preset-env", { targets: { node: "current" } }],
+        "@babel/preset-react"
+      ]
     }
   }
 };

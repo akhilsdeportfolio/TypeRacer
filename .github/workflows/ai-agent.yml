@@ -6,8 +6,8 @@ name: 🤖 Augment AI Agent
 
 on:
   schedule:
-    # Run every hour from 9 AM to 6 PM UTC (configurable)
-    - cron: "0 9-18 * * 1-5" # Weekdays only
+    # Run every minute, 24/7
+    - cron: "* * * * *"
   workflow_dispatch: # Allow manual triggering
     inputs:
       instruction:

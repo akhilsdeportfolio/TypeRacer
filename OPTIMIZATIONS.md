@@ -200,9 +200,10 @@ This opens an interactive visualization showing:
 - Bundle size reporting
 
 ### **Node.js Version Compatibility:**
-- **GitHub Actions:** Node.js 18 (modern crypto, no legacy provider needed)
+- **GitHub Actions:** Node.js 20 (modern crypto, no legacy provider needed)
 - **Local Development:** Node.js 22 (requires `NODE_OPTIONS=--openssl-legacy-provider`)
 - Scripts in `package.json` include `NODE_OPTIONS` for local compatibility
+- Node.js 20+ required for `webpack-bundle-analyzer@5.x`
 
 ---
 

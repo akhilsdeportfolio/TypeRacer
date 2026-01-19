@@ -1,10 +1,11 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-01-19T21:38:57.289Z",
+  "lastAnalysis": "2026-01-19T22:11:19.159Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
-    "src/pages/FallingWordsPage.css"
+    "src/pages/FallingWordsPage.css",
+    "src/pages/StatsPage.js"
   ],
-  "lastFile": "src/pages/FallingWordsPage.css"
+  "lastFile": "src/pages/StatsPage.js"
 }

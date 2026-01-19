@@ -1,6 +1,6 @@
 {
   "initialized": "2026-01-19T20:15:00Z",
-  "totalRuns": 0,
+  "totalRuns": 1,
   "successfulRuns": 0,
   "failedRuns": 0,
   "prsCreated": 0,
@@ -8,13 +8,27 @@
   "prsClosed": 0,
   "filesAnalyzed": 0,
   "issuesCreated": 0,
-  "lastActivity": null,
+  "lastActivity": "2026-01-19T20:26:49.657Z",
   "agents": {
-    "coordinator": { "runs": 0, "lastRun": null },
-    "analyzer": { "runs": 0, "lastRun": null },
-    "aiAgent": { "runs": 0, "lastRun": null },
-    "autoMerge": { "runs": 0, "lastRun": null },
-    "logger": { "runs": 0, "lastRun": null }
+    "coordinator": {
+      "runs": 0,
+      "lastRun": null
+    },
+    "analyzer": {
+      "runs": 0,
+      "lastRun": null
+    },
+    "aiAgent": {
+      "runs": 0,
+      "lastRun": null
+    },
+    "autoMerge": {
+      "runs": 1,
+      "lastRun": "2026-01-19T20:26:49.612Z"
+    },
+    "logger": {
+      "runs": 0,
+      "lastRun": null
+    }
   }
 }
-

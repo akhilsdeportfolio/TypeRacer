@@ -1,12 +1,13 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-01-19T22:43:09.687Z",
+  "lastAnalysis": "2026-01-19T23:10:34.865Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
     "src/pages/FallingWordsPage.css",
     "src/pages/StatsPage.js",
-    "src/pages/index.js"
+    "src/pages/index.js",
+    "src/pages/SettingsPage.css"
   ],
-  "lastFile": "src/pages/index.js"
+  "lastFile": "src/pages/SettingsPage.css"
 }

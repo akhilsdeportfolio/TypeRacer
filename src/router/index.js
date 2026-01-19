@@ -68,7 +68,19 @@ export const routes = [
   },
 ];
 
-export const router = createBrowserRouter(routes);
+// Get basename from PUBLIC_PATH environment variable (for GitHub Pages)
+// This is injected at build time via webpack DefinePlugin
+const getBasename = () => {
+  // Check if we're on GitHub Pages by looking at the path
+  if (typeof window !== 'undefined' && window.location.pathname.startsWith('/TypeRacer')) {
+    return '/TypeRacer';
+  }
+  return '';
+};
+
+export const router = createBrowserRouter(routes, {
+  basename: getBasename(),
+});
 
 // Game metadata for navigation
 export const GAMES = [

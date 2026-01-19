@@ -17,6 +17,8 @@ module.exports = function(_env, argv) {
   const isProduction = argv.mode === "production";
   const isDevelopment = !isProduction;
   const outputDir = process.env.OUTPUT_DIR || "dist";
+  // For GitHub Pages, use repository name as base path
+  const publicPath = process.env.PUBLIC_PATH || "/";
 
   return {
     devtool: isDevelopment && "cheap-module-source-map",
@@ -24,7 +26,7 @@ module.exports = function(_env, argv) {
     output: {
       path: path.resolve(__dirname, outputDir),
       filename: "assets/js/[name].[contenthash:8].js",
-      publicPath: "/"
+      publicPath: publicPath
     },
     module: {
       rules: [

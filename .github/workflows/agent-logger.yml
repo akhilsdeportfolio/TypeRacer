@@ -103,67 +103,70 @@ jobs:
             }).join('\n');
             
             // Build the log content
-            const logContent = `## 📊 AI Agent Activity Dashboard
-
-**Last Updated:** ${new Date().toISOString()}
-**Monitoring Period:** Last 24 hours
-
----
-
-### 📈 Statistics
-
-| Metric | Value |
-|--------|-------|
-| 🔄 Total Agent Runs (24h) | ${last24h} |
-| ✅ Successful | ${successful} |
-| ❌ Failed | ${failed} |
-| 📝 Open AI PRs | ${aiPRs.length} |
-| 🎉 PRs Merged (24h) | ${mergedToday.length} |
-| 📋 Analysis Issues | ${analysisIssues.filter(i => i.state === 'open').length} open |
-
----
-
-### 🕐 Recent Agent Activity
-
-| Time (UTC) | Status | Agent | Result | Link |
-|------------|--------|-------|--------|------|
-${recentActivity || '| No recent activity | | | | |'}
-
----
-
-### 📝 PR Activity
-
-| PR | Title | Status |
-|----|-------|--------|
-${prActivity || '| No PRs | | |'}
-
----
-
-### 🔬 Analysis Queue
-
-${analysisIssues.filter(i => i.state === 'open').slice(0, 5).map(i => 
-  `- [#${i.number}](${i.html_url}): ${i.title}`
-).join('\n') || '- Queue empty'}
-
----
-
-### 🤖 Agent Status
-
-| Agent | Last Run | Status |
-|-------|----------|--------|
-${agentWorkflows.map(name => {
-  const lastRun = agentRuns.find(r => r.name === name || r.name.includes(name.replace(/[🤖🔬🎯🔀📊]/g, '').trim()));
-  if (lastRun) {
-    const emoji = lastRun.conclusion === 'success' ? '🟢' : lastRun.conclusion === 'failure' ? '🔴' : '🟡';
-    return `| ${name} | ${new Date(lastRun.created_at).toISOString().slice(0, 19)} | ${emoji} ${lastRun.conclusion || lastRun.status} |`;
-  }
-  return `| ${name} | Never | ⚪ Unknown |`;
-}).join('\n')}
-
----
-
-*Auto-updated every 2 minutes by Agent Logger*
-*View live: [Actions Tab](https://github.com/${owner}/${repo}/actions)*`;
+            const bold = (text) => '**' + text + '**';
+            const logContent = [
+              '## 📊 AI Agent Activity Dashboard',
+              '',
+              bold('Last Updated:') + ' ' + new Date().toISOString(),
+              bold('Monitoring Period:') + ' Last 24 hours',
+              '',
+              '---',
+              '',
+              '### 📈 Statistics',
+              '',
+              '| Metric | Value |',
+              '|--------|-------|',
+              `| 🔄 Total Agent Runs (24h) | ${last24h} |`,
+              `| ✅ Successful | ${successful} |`,
+              `| ❌ Failed | ${failed} |`,
+              `| 📝 Open AI PRs | ${aiPRs.length} |`,
+              `| 🎉 PRs Merged (24h) | ${mergedToday.length} |`,
+              `| 📋 Analysis Issues | ${analysisIssues.filter(i => i.state === 'open').length} open |`,
+              '',
+              '---',
+              '',
+              '### 🕐 Recent Agent Activity',
+              '',
+              '| Time (UTC) | Status | Agent | Result | Link |',
+              '|------------|--------|-------|--------|------|',
+              recentActivity || '| No recent activity | | | | |',
+              '',
+              '---',
+              '',
+              '### 📝 PR Activity',
+              '',
+              '| PR | Title | Status |',
+              '|----|-------|--------|',
+              prActivity || '| No PRs | | |',
+              '',
+              '---',
+              '',
+              '### 🔬 Analysis Queue',
+              '',
+              analysisIssues.filter(i => i.state === 'open').slice(0, 5).map(i =>
+                `- [#${i.number}](${i.html_url}): ${i.title}`
+              ).join('\n') || '- Queue empty',
+              '',
+              '---',
+              '',
+              '### 🤖 Agent Status',
+              '',
+              '| Agent | Last Run | Status |',
+              '|-------|----------|--------|',
+              agentWorkflows.map(name => {
+                const lastRun = agentRuns.find(r => r.name === name || r.name.includes(name.replace(/[🤖🔬🎯🔀📊]/g, '').trim()));
+                if (lastRun) {
+                  const emoji = lastRun.conclusion === 'success' ? '🟢' : lastRun.conclusion === 'failure' ? '🔴' : '🟡';
+                  return `| ${name} | ${new Date(lastRun.created_at).toISOString().slice(0, 19)} | ${emoji} ${lastRun.conclusion || lastRun.status} |`;
+                }
+                return `| ${name} | Never | ⚪ Unknown |`;
+              }).join('\n'),
+              '',
+              '---',
+              '',
+              '_Auto-updated every 2 minutes by Agent Logger_',
+              `_View live: [Actions Tab](https://github.com/${owner}/${repo}/actions)_`
+            ].join('\n');
 
             // Find or create the log issue
             const { data: logIssues } = await github.rest.issues.listForRepo({

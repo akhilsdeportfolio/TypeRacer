@@ -5,10 +5,10 @@
   "targets": {
     "fronten-prepp": {
       "hosting": {
-        "optimized": ["typeracer-optimized"],
-        "unoptimized": ["typeracer-unoptimized"]
+        "dev": ["typeracer-dev"],
+        "stage": ["typeracer-stage"],
+        "prod": ["typeracer-prod"]
       }
     }
   }
 }
-

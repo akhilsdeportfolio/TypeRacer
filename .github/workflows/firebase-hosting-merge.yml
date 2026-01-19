@@ -1,4 +1,4 @@
-# Deploy to Firebase Hosting and Surge.sh
+# Deploy to Firebase Hosting (dev, stage, prod)
 name: Build and Deploy
 
 'on':
@@ -10,181 +10,113 @@ name: Build and Deploy
 permissions:
   contents: read
 
-# Cancel in-progress runs for the same branch
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  # Parallel job: Linting
   lint:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'yarn'
-
-      - name: Enable Corepack
-        run: corepack enable
-
-      - name: Prepare Yarn
-        run: corepack prepare yarn@4.9.2 --activate
-
-      - name: Cache node_modules
-        uses: actions/cache@v4
+      - run: corepack enable
+      - run: corepack prepare yarn@4.9.2 --activate
+      - uses: actions/cache@v4
         id: cache-node-modules
         with:
           path: node_modules
           key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
-
-      - name: Install dependencies
-        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+      - if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: yarn install --immutable
+      - run: yarn lint
 
-      - name: Run linting
-        run: yarn lint
-
-  # Parallel job: Testing
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'yarn'
-
-      - name: Enable Corepack
-        run: corepack enable
-
-      - name: Prepare Yarn
-        run: corepack prepare yarn@4.9.2 --activate
-
-      - name: Cache node_modules
-        uses: actions/cache@v4
+      - run: corepack enable
+      - run: corepack prepare yarn@4.9.2 --activate
+      - uses: actions/cache@v4
         id: cache-node-modules
         with:
           path: node_modules
           key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
-
-      - name: Install dependencies
-        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+      - if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: yarn install --immutable
-
-      - name: Run tests
-        run: yarn test:ci
+      - run: yarn test:ci
         env:
           CI: true
-
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: coverage-report
           path: coverage/
           retention-days: 7
 
-  # Build and Deploy (depends on lint and test)
   build_and_deploy:
     needs: [lint, test]
     runs-on: ubuntu-latest
     env:
       NODE_ENV: production
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'yarn'
-
-      - name: Enable Corepack
-        run: corepack enable
-
-      - name: Prepare Yarn
-        run: corepack prepare yarn@4.9.2 --activate
-
-      - name: Cache node_modules
-        uses: actions/cache@v4
+      - run: corepack enable
+      - run: corepack prepare yarn@4.9.2 --activate
+      - uses: actions/cache@v4
         id: cache-node-modules
         with:
           path: node_modules
           key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
-
-      - name: Install dependencies
-        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+      - if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: yarn install --immutable
 
-      - name: Build optimized bundle (with compression)
-        run: yarn build:optimized
+      - name: Build development bundle
+        run: yarn build:dev
 
-      - name: Build unoptimized bundle (no compression)
-        run: yarn build:unoptimized
+      - name: Build staging bundle
+        run: yarn build:stage
 
-      - name: Display bundle size comparison
+      - name: Build production bundle
+        run: yarn build:prod
+
+      - name: Display bundle sizes
         run: |
-          echo "📦 Bundle Size Report:"
-          echo ""
-          echo "🚀 OPTIMIZED (with compression):"
-          du -sh dist/
-          echo "📄 JS/CSS Files:"
-          find dist -type f \( -name "*.js" -o -name "*.css" \) | head -10 | xargs ls -lh 2>/dev/null || echo "No JS/CSS files found"
-          echo "🗜️ Compressed Files:"
-          find dist -type f \( -name "*.gz" -o -name "*.br" \) | head -10 | xargs ls -lh 2>/dev/null || echo "No compressed files found"
-          echo ""
-          echo "� UNOPTIMIZED (no compression):"
-          du -sh dist-unoptimized/
-          echo "📄 JS/CSS Files:"
-          find dist-unoptimized -type f \( -name "*.js" -o -name "*.css" \) | head -10 | xargs ls -lh 2>/dev/null || echo "No JS/CSS files found"
+          echo "Bundle Size Report:"
+          echo "DEVELOPMENT:" && du -sh dist-dev/
+          echo "STAGING:" && du -sh dist-stage/
+          echo "PRODUCTION:" && du -sh dist-prod/
 
-      - name: Install Firebase CLI
-        run: npm install -g firebase-tools
+      - run: npm install -g firebase-tools
 
-      - name: Deploy optimized to Firebase
-        run: firebase deploy --only hosting:optimized --project fronten-prepp --token "$FIREBASE_TOKEN"
+      - name: Deploy development to Firebase
+        run: firebase deploy --only hosting:dev --project fronten-prepp --token "$FIREBASE_TOKEN"
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
-      - name: Deploy unoptimized to Firebase
-        run: firebase deploy --only hosting:unoptimized --project fronten-prepp --token "$FIREBASE_TOKEN"
+      - name: Deploy staging to Firebase
+        run: firebase deploy --only hosting:stage --project fronten-prepp --token "$FIREBASE_TOKEN"
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
-      - name: Build for Surge (no compression)
-        run: yarn build:surge
-
-      - name: Add 200.html for SPA routing (Surge)
-        run: cp dist-surge/index.html dist-surge/200.html
-
-      - name: Install Surge CLI
-        run: npm install -g surge
-
-      - name: Deploy to Surge (truly uncompressed)
-        run: surge ./dist-surge typeracer-uncompressed.surge.sh --token $SURGE_TOKEN
+      - name: Deploy production to Firebase
+        run: firebase deploy --only hosting:prod --project fronten-prepp --token "$FIREBASE_TOKEN"
         env:
-          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
       - name: Deployment summary
         run: |
-          echo "✅ All Deployments successful!"
-          echo ""
-          echo "🚀 Optimized (with webpack compression):"
-          echo "   https://typeracer-optimized.web.app"
-          echo ""
-          echo "📦 Unoptimized (Firebase CDN still compresses):"
-          echo "   https://typeracer-unoptimized.web.app"
-          echo ""
-          echo "� Truly Uncompressed (Surge - no compression):"
-          echo "   https://typeracer-uncompressed.surge.sh"
-          echo ""
-          echo "📊 Use the Surge URL for baseline performance testing"
+          echo "All Deployments successful!"
+          echo "Development: https://typeracer-dev.web.app"
+          echo "Staging: https://typeracer-stage.web.app"
+          echo "Production: https://typeracer-prod.web.app"

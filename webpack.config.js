@@ -5,23 +5,67 @@ const webpack = require("webpack");
 const TerserWebpackPlugin = require("terser-webpack-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
-// Lazy load optional plugins to avoid ES module issues in CI
-const shouldCompress = process.env.ENABLE_COMPRESSION !== "false";
-const shouldAnalyze = process.env.ANALYZE === "true";
+/**
+ * Build Environment Configuration
+ *
+ * BUILD_ENV can be: 'development', 'staging', 'production'
+ * - development: No minification, no compression, source maps, console logs kept
+ * - staging: Minification enabled, no compression, no source maps
+ * - production: Full optimization, compression (gzip + brotli), no source maps
+ */
+const BUILD_ENV = process.env.BUILD_ENV || "production";
 
-// Only require these if needed (avoids loading problematic dependencies in CI)
+// Determine optimization levels based on BUILD_ENV
+const buildConfig = {
+  development: {
+    minimize: false,
+    compress: false,
+    sourceMaps: true,
+    dropConsole: false,
+    dropDebugger: false,
+    outputDir: "dist-dev"
+  },
+  staging: {
+    minimize: true,
+    compress: false,
+    sourceMaps: false,
+    dropConsole: false,
+    dropDebugger: true,
+    outputDir: "dist-stage"
+  },
+  production: {
+    minimize: true,
+    compress: true,
+    sourceMaps: false,
+    dropConsole: true,
+    dropDebugger: true,
+    outputDir: "dist-prod"
+  }
+};
+
+const currentConfig = buildConfig[BUILD_ENV] || buildConfig.production;
+
+// Allow overrides via environment variables
+const shouldCompress = process.env.ENABLE_COMPRESSION !== "false" && currentConfig.compress;
+const shouldAnalyze = process.env.ANALYZE === "true";
+const outputDir = process.env.OUTPUT_DIR || currentConfig.outputDir;
+const publicPath = process.env.PUBLIC_PATH || "/";
+
+// Only require compression plugin if needed
 const CompressionPlugin = shouldCompress ? require("compression-webpack-plugin") : null;
 const BundleAnalyzerPlugin = shouldAnalyze ? require("webpack-bundle-analyzer").BundleAnalyzerPlugin : null;
 
 module.exports = function(_env, argv) {
   const isProduction = argv.mode === "production";
-  const isDevelopment = !isProduction;
-  const outputDir = process.env.OUTPUT_DIR || "dist";
-  // For GitHub Pages, use repository name as base path
-  const publicPath = process.env.PUBLIC_PATH || "/";
+
+  console.log(`\n📦 Building for: ${BUILD_ENV.toUpperCase()}`);
+  console.log(`   Minimize: ${currentConfig.minimize}`);
+  console.log(`   Compress: ${shouldCompress}`);
+  console.log(`   Source Maps: ${currentConfig.sourceMaps}`);
+  console.log(`   Output: ${outputDir}\n`);
 
   return {
-    devtool: isDevelopment && "cheap-module-source-map",
+    devtool: currentConfig.sourceMaps ? "cheap-module-source-map" : false,
     entry: "./src/index.js",
     output: {
       path: path.resolve(__dirname, outputDir),
@@ -139,8 +183,8 @@ module.exports = function(_env, argv) {
         })
     ].filter(Boolean),
     optimization: {
-      minimize: isProduction,
-      minimizer: [
+      minimize: currentConfig.minimize,
+      minimizer: currentConfig.minimize ? [
         new TerserWebpackPlugin({
           terserOptions: {
             parse: {
@@ -151,8 +195,8 @@ module.exports = function(_env, argv) {
               warnings: false,
               comparisons: false,
               inline: 2,
-              drop_console: isProduction,
-              drop_debugger: isProduction
+              drop_console: currentConfig.dropConsole,
+              drop_debugger: currentConfig.dropDebugger
             },
             mangle: {
               safari10: true
@@ -165,14 +209,14 @@ module.exports = function(_env, argv) {
           },
           parallel: true,
           cache: true,
-          sourceMap: false
+          sourceMap: currentConfig.sourceMaps
         }),
         new OptimizeCssAssetsPlugin({
           cssProcessorOptions: {
-            map: false
+            map: currentConfig.sourceMaps
           }
         })
-      ],
+      ] : [],
       splitChunks: {
         chunks: "all",
         minSize: 10000,
@@ -231,7 +275,7 @@ module.exports = function(_env, argv) {
       sideEffects: true
     },
     devServer: {
-      compress: true,
+      compress: BUILD_ENV !== "development", // No compression in dev mode
       historyApiFallback: true,
       open: true,
       overlay: true

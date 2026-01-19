@@ -1,0 +1,87 @@
+/* Timer Display Styles */
+
+.timer-display {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+}
+
+/* Sizes */
+.timer-display--small {
+  padding: 0.5rem 1rem;
+}
+
+.timer-display--small .timer-display__time {
+  font-size: 1.25rem;
+}
+
+.timer-display--medium .timer-display__time {
+  font-size: 2rem;
+}
+
+.timer-display--large {
+  padding: 1rem 2rem;
+}
+
+.timer-display--large .timer-display__time {
+  font-size: 3rem;
+}
+
+/* Status */
+.timer-display--normal {
+  color: white;
+}
+
+.timer-display--warning {
+  background: rgba(251, 191, 36, 0.2);
+  color: #fbbf24;
+  animation: pulse-warning 1s ease-in-out infinite;
+}
+
+.timer-display--danger {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  animation: pulse-danger 0.5s ease-in-out infinite;
+}
+
+@keyframes pulse-warning {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes pulse-danger {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+/* Label */
+.timer-display__label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+  margin-bottom: 0.25rem;
+}
+
+/* Time */
+.timer-display__time {
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/* Warning icon */
+.timer-display__warning {
+  margin-left: 0.5rem;
+  animation: shake 0.3s ease-in-out infinite;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+

@@ -1,0 +1,100 @@
+/* Streak Counter Styles */
+
+.streak-counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Fire levels */
+.streak-counter--cold {
+  background: linear-gradient(135deg, rgba(100, 116, 139, 0.2), rgba(100, 116, 139, 0.1));
+}
+
+.streak-counter--warm {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(251, 191, 36, 0.1));
+}
+
+.streak-counter--hot {
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.3), rgba(249, 115, 22, 0.1));
+}
+
+.streak-counter--epic {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.3), rgba(249, 115, 22, 0.2));
+}
+
+.streak-counter--legendary {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.3), rgba(239, 68, 68, 0.2));
+}
+
+/* Fire emoji */
+.streak-counter__fire {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.streak-counter--animated .streak-counter__fire {
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* Content */
+.streak-counter__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.streak-counter__label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.streak-counter__value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+}
+
+.streak-counter--hot .streak-counter__value,
+.streak-counter--epic .streak-counter__value,
+.streak-counter--legendary .streak-counter__value {
+  background: linear-gradient(135deg, #fbbf24, #ef4444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Max streak */
+.streak-counter__max {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Message */
+.streak-counter__message {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fbbf24;
+  animation: bounce 0.5s ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+

@@ -1,21 +1,22 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import './Button.css';
 
 /**
  * Button component - Atomic design atom
  * Reusable button with different variants
+ * Memoized to prevent unnecessary re-renders
  */
-const Button = ({ 
-  children, 
-  onClick, 
-  variant = 'primary', 
+const Button = memo(({
+  children,
+  onClick,
+  variant = 'primary',
   size = 'medium',
   disabled = false,
   className = '',
   type = 'button',
   title,
-  ...props 
+  ...props
 }) => {
   const buttonClass = `btn btn--${variant} btn--${size} ${className}`.trim();
 
@@ -31,7 +32,9 @@ const Button = ({
       {children}
     </button>
   );
-};
+});
+
+Button.displayName = 'Button';
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,

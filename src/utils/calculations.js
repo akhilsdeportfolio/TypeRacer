@@ -71,3 +71,4 @@ export const getCharStatus = (userInput, targetText, index) => {
   return userInput[index] === targetText[index] ? 'correct' : 'incorrect';
 };
 
+// test

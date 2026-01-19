@@ -6,21 +6,25 @@ name: Deploy to Firebase Hosting on merge
   push:
     branches:
       - main
+
+# Cancel in-progress runs for the same branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  build_and_deploy:
+  # Parallel job: Linting
+  lint:
     runs-on: ubuntu-latest
-
-    env:
-      NODE_ENV: production
-
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'yarn'
 
       - name: Enable Corepack
         run: corepack enable
@@ -28,33 +32,98 @@ jobs:
       - name: Prepare Yarn
         run: corepack prepare yarn@4.9.2 --activate
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-
-      - name: Cache yarn dependencies
-        uses: actions/cache@v3
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        id: cache-node-modules
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: yarn install --immutable
 
       - name: Run linting
         run: yarn lint
+
+  # Parallel job: Testing
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Prepare Yarn
+        run: corepack prepare yarn@4.9.2 --activate
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        id: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: yarn install --immutable
 
       - name: Run tests
         run: yarn test:ci
         env:
           CI: true
 
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
+          retention-days: 7
+
+  # Build and Deploy (depends on lint and test)
+  build_and_deploy:
+    needs: [lint, test]
+    runs-on: ubuntu-latest
+    env:
+      NODE_ENV: production
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Prepare Yarn
+        run: corepack prepare yarn@4.9.2 --activate
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        id: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: yarn install --immutable
+
       - name: Build production bundle
         run: yarn build:prod
-        env:
-          NODE_ENV: production
 
       - name: Display bundle size
         run: |
@@ -62,10 +131,10 @@ jobs:
           du -sh dist/
           echo ""
           echo "📄 File Sizes:"
-          find dist -type f -name "*.js" -o -name "*.css" | xargs ls -lh
+          find dist -type f \( -name "*.js" -o -name "*.css" \) | head -20 | xargs ls -lh 2>/dev/null || echo "No JS/CSS files found"
           echo ""
           echo "🗜️ Compressed Files:"
-          find dist -type f -name "*.gz" -o -name "*.br" | xargs ls -lh
+          find dist -type f \( -name "*.gz" -o -name "*.br" \) | head -20 | xargs ls -lh 2>/dev/null || echo "No compressed files found"
 
       - name: Install Firebase CLI
         run: npm install -g firebase-tools

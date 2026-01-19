@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import './Character.css';
 
 /**
  * Character component - Atomic design atom
  * Displays a single character with status styling
+ * Memoized for performance - prevents re-rendering unchanged characters
  */
-const Character = ({ 
-  char, 
+const Character = memo(({
+  char,
   status = 'pending',
   isCursor = false,
   className = '',
-  ...props 
+  ...props
 }) => {
   const charClass = `character character--${status} ${isCursor ? 'character--cursor' : ''} ${className}`.trim();
 
@@ -20,7 +21,9 @@ const Character = ({
       {char}
     </span>
   );
-};
+});
+
+Character.displayName = 'Character';
 
 Character.propTypes = {
   char: PropTypes.string.isRequired,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import Text from '../../atoms/Text';
 import './StatCard.css';
@@ -6,14 +6,15 @@ import './StatCard.css';
 /**
  * StatCard component - Atomic design molecule
  * Displays a statistic with label and value
+ * Memoized to prevent unnecessary re-renders when stats haven't changed
  */
-const StatCard = ({ 
-  label, 
-  value, 
+const StatCard = memo(({
+  label,
+  value,
   icon,
   variant = 'default',
   className = '',
-  ...props 
+  ...props
 }) => {
   const cardClass = `stat-card stat-card--${variant} ${className}`.trim();
 
@@ -30,7 +31,9 @@ const StatCard = ({
       </div>
     </div>
   );
-};
+});
+
+StatCard.displayName = 'StatCard';
 
 StatCard.propTypes = {
   label: PropTypes.string.isRequired,

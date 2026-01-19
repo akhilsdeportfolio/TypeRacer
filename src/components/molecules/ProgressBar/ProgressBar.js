@@ -1,20 +1,32 @@
-import React from 'react';
+import React, { memo, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import './ProgressBar.css';
 
 /**
  * ProgressBar component - Atomic design molecule
  * Displays progress with percentage
+ * Memoized to prevent unnecessary re-renders
  */
-const ProgressBar = ({ 
-  progress = 0, 
+const ProgressBar = memo(({
+  progress = 0,
   showLabel = true,
   variant = 'default',
   className = '',
-  ...props 
+  ...props
 }) => {
   const barClass = `progress-bar progress-bar--${variant} ${className}`.trim();
-  const clampedProgress = Math.min(100, Math.max(0, progress));
+
+  // Memoize progress calculation to avoid recalculation on every render
+  const clampedProgress = useMemo(() =>
+    Math.min(100, Math.max(0, Math.round(progress))),
+    [progress]
+  );
+
+  // Memoize style object to prevent unnecessary re-renders
+  const fillStyle = useMemo(() =>
+    ({ width: `${clampedProgress}%` }),
+    [clampedProgress]
+  );
 
   return (
     <div className={barClass} {...props}>
@@ -24,14 +36,16 @@ const ProgressBar = ({
         </div>
       )}
       <div className="progress-bar__track">
-        <div 
-          className="progress-bar__fill" 
-          style={{ width: `${clampedProgress}%` }}
+        <div
+          className="progress-bar__fill"
+          style={fillStyle}
         />
       </div>
     </div>
   );
-};
+});
+
+ProgressBar.displayName = 'ProgressBar';
 
 ProgressBar.propTypes = {
   progress: PropTypes.number,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Character from '../../atoms/Character';
 import { getCharStatus } from '../../../utils/calculations';
@@ -7,38 +7,44 @@ import './GameArea.css';
 /**
  * GameArea component - Atomic design organism
  * Displays the typing area with characters
+ * Memoized with optimized character rendering
  */
-const GameArea = ({ 
+const GameArea = memo(({
   targetText,
   userInput,
   onInputChange,
   inputRef,
   disabled = false,
   className = '',
-  ...props 
+  ...props
 }) => {
-  const handleChange = (e) => {
+  // Memoize the change handler
+  const handleChange = useCallback((e) => {
     onInputChange(e.target.value);
-  };
+  }, [onInputChange]);
+
+  // Memoize character data to prevent recalculation
+  const characters = useMemo(() => {
+    return targetText.split('').map((char, index) => ({
+      char,
+      status: getCharStatus(userInput, targetText, index),
+      isCursor: index === userInput.length,
+    }));
+  }, [targetText, userInput]);
 
   return (
     <div className={`game-area ${className}`.trim()} {...props}>
       <div className="game-area__content">
-        {targetText.split('').map((char, index) => {
-          const status = getCharStatus(userInput, targetText, index);
-          const isCursor = index === userInput.length;
-          
-          return (
-            <Character
-              key={index}
-              char={char}
-              status={status}
-              isCursor={isCursor}
-            />
-          );
-        })}
+        {characters.map((charData, index) => (
+          <Character
+            key={index}
+            char={charData.char}
+            status={charData.status}
+            isCursor={charData.isCursor}
+          />
+        ))}
       </div>
-      
+
       <input
         ref={inputRef}
         type="text"
@@ -54,7 +60,9 @@ const GameArea = ({
       />
     </div>
   );
-};
+});
+
+GameArea.displayName = 'GameArea';
 
 GameArea.propTypes = {
   targetText: PropTypes.string.isRequired,

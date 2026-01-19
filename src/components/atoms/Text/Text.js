@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import './Text.css';
 
 /**
  * Text component - Atomic design atom
  * Reusable text with different variants
+ * Memoized to prevent unnecessary re-renders
  */
-const Text = ({ 
-  children, 
-  variant = 'body', 
+const Text = memo(({
+  children,
+  variant = 'body',
   className = '',
   as: Component = 'span',
-  ...props 
+  ...props
 }) => {
   const textClass = `text text--${variant} ${className}`.trim();
 
@@ -20,7 +21,9 @@ const Text = ({
       {children}
     </Component>
   );
-};
+});
+
+Text.displayName = 'Text';
 
 Text.propTypes = {
   children: PropTypes.node.isRequired,

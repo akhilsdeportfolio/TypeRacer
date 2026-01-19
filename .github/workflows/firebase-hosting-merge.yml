@@ -9,23 +9,54 @@ name: Deploy to Firebase Hosting on merge
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
+
+    env:
+      NODE_ENV: production
+
     steps:
-      - uses: actions/checkout@v3
-      
+      - name: Checkout code
+        uses: actions/checkout@v3
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
-          
+          cache: 'yarn'
+
       - name: Enable Corepack
         run: corepack enable
-        
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+
+      - name: Cache yarn dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
       - name: Install dependencies
         run: yarn install --immutable
-        
-      - name: Build
-        run: yarn build
-        
+
+      - name: Build production bundle
+        run: yarn build:prod
+        env:
+          NODE_ENV: production
+
+      - name: Display bundle size
+        run: |
+          echo "📦 Bundle Size Report:"
+          du -sh dist/
+          echo ""
+          echo "📄 File Sizes:"
+          find dist -type f -name "*.js" -o -name "*.css" | xargs ls -lh
+          echo ""
+          echo "🗜️ Compressed Files:"
+          find dist -type f -name "*.gz" -o -name "*.br" | xargs ls -lh
+
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
@@ -33,4 +64,10 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
           channelId: live
           projectId: fronten-prepp
+
+      - name: Deployment summary
+        run: |
+          echo "✅ Deployment successful!"
+          echo "🌐 Live URL: https://fronten-prepp.web.app"
+          echo "📊 Check Firebase Console for analytics"
 

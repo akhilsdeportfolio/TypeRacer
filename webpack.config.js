@@ -4,10 +4,14 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 const TerserWebpackPlugin = require("terser-webpack-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const CompressionPlugin = require("compression-webpack-plugin");
+const { BrotliCompressPlugin } = require("brotli-webpack-plugin");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
 module.exports = function(_env, argv) {
   const isProduction = argv.mode === "production";
   const isDevelopment = !isProduction;
+  const shouldAnalyze = process.env.ANALYZE === "true";
 
   return {
     devtool: isDevelopment && "cheap-module-source-map",
@@ -72,56 +76,143 @@ module.exports = function(_env, argv) {
         }),
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, "public/index.html"),
-        inject: true
+        inject: true,
+        minify: isProduction
+          ? {
+              removeComments: true,
+              collapseWhitespace: true,
+              removeRedundantAttributes: true,
+              useShortDoctype: true,
+              removeEmptyAttributes: true,
+              removeStyleLinkTypeAttributes: true,
+              keepClosingSlash: true,
+              minifyJS: true,
+              minifyCSS: true,
+              minifyURLs: true
+            }
+          : false
       }),
       new webpack.DefinePlugin({
         "process.env.NODE_ENV": JSON.stringify(
           isProduction ? "production" : "development"
         )
-      })
+      }),
+      // Gzip compression
+      isProduction &&
+        new CompressionPlugin({
+          filename: "[path][base].gz",
+          algorithm: "gzip",
+          test: /\.(js|css|html|svg)$/,
+          threshold: 8192,
+          minRatio: 0.8
+        }),
+      // Brotli compression (better than gzip)
+      isProduction &&
+        new BrotliCompressPlugin({
+          asset: "[path].br[query]",
+          test: /\.(js|css|html|svg)$/,
+          threshold: 8192,
+          minRatio: 0.8
+        }),
+      // Bundle analyzer (only when ANALYZE=true)
+      shouldAnalyze &&
+        new BundleAnalyzerPlugin({
+          analyzerMode: "static",
+          reportFilename: "bundle-report.html",
+          openAnalyzer: true
+        })
     ].filter(Boolean),
     optimization: {
       minimize: isProduction,
       minimizer: [
         new TerserWebpackPlugin({
           terserOptions: {
+            parse: {
+              ecma: 8
+            },
             compress: {
-              comparisons: false
+              ecma: 5,
+              warnings: false,
+              comparisons: false,
+              inline: 2,
+              drop_console: isProduction,
+              drop_debugger: isProduction
             },
             mangle: {
               safari10: true
             },
             output: {
+              ecma: 5,
               comments: false,
               ascii_only: true
-            },
-            warnings: false
-          }
+            }
+          },
+          parallel: true,
+          cache: true,
+          sourceMap: false
         }),
-        new OptimizeCssAssetsPlugin()
+        new OptimizeCssAssetsPlugin({
+          cssProcessorOptions: {
+            map: false
+          }
+        })
       ],
       splitChunks: {
         chunks: "all",
-        minSize: 0,
-        maxInitialRequests: 10,
-        maxAsyncRequests: 10,
+        minSize: 10000,
+        maxSize: 250000,
+        minChunks: 1,
+        maxAsyncRequests: 30,
+        maxInitialRequests: 30,
+        automaticNameDelimiter: ".",
         cacheGroups: {
+          // React and React-DOM in separate chunk
+          react: {
+            test: /[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/,
+            name: "vendors.react",
+            priority: 40,
+            reuseExistingChunk: true
+          },
+          // Babel runtime
+          babel: {
+            test: /[\\/]node_modules[\\/](@babel)[\\/]/,
+            name: "vendors.babel",
+            priority: 30,
+            reuseExistingChunk: true
+          },
+          // Other node_modules
           vendors: {
             test: /[\\/]node_modules[\\/]/,
-            name(module, chunks, cacheGroupKey) {
+            name(module) {
               const packageName = module.context.match(
                 /[\\/]node_modules[\\/](.*?)([\\/]|$)/
               )[1];
-              return `${cacheGroupKey}.${packageName.replace("@", "")}`;
-            }
+              return `vendors.${packageName.replace("@", "")}`;
+            },
+            priority: 20,
+            reuseExistingChunk: true
           },
+          // Common code used in multiple places
           common: {
             minChunks: 2,
-            priority: -10
+            priority: 10,
+            reuseExistingChunk: true,
+            enforce: true
+          },
+          // Default
+          default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true
           }
         }
       },
-      runtimeChunk: "single"
+      runtimeChunk: {
+        name: "runtime"
+      },
+      moduleIds: "deterministic",
+      usedExports: true,
+      sideEffects: true
     },
     devServer: {
       compress: true,

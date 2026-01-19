@@ -62,19 +62,38 @@ yarn build:prod
 
 ---
 
-### `yarn build:analyze`
-**Purpose:** Build and generate bundle analysis  
-**Output:** `stats.json` file  
-**Use when:** Analyzing bundle size and dependencies
+### `yarn build:analyze` (or `yarn analyze`)
+**Purpose:** Build with interactive bundle analyzer
+**Output:** `dist/` folder + `bundle-report.html`
+**Use when:** Analyzing bundle size and composition
 
 ```bash
+yarn analyze
+# or
 yarn build:analyze
+```
+
+**Features:**
+- Opens interactive visualization in browser
+- Shows bundle sizes and composition
+- Identifies duplicate dependencies
+- Helps optimize bundle size
+
+---
+
+### `yarn build:stats`
+**Purpose:** Generate webpack stats JSON
+**Output:** `stats.json` file
+**Use when:** Need raw stats for external tools
+
+```bash
+yarn build:stats
 ```
 
 **Then analyze with:**
 ```bash
 # Upload stats.json to https://webpack.github.io/analyse/
-# Or use webpack-bundle-analyzer
+# Or use other analysis tools
 ```
 
 ---
@@ -267,7 +286,9 @@ yarn build
 | `start` | `yarn start` | Dev server | localhost:8080 |
 | `build` | `yarn build` | Production build | dist/ |
 | `build:prod` | `yarn build:prod` | Build with NODE_ENV | dist/ |
-| `build:analyze` | `yarn build:analyze` | Bundle analysis | stats.json |
+| `analyze` | `yarn analyze` | Interactive bundle analyzer | bundle-report.html |
+| `build:analyze` | `yarn build:analyze` | Same as analyze | bundle-report.html |
+| `build:stats` | `yarn build:stats` | Generate stats JSON | stats.json |
 | `serve` | `yarn serve` | Firebase emulator | localhost:5000 |
 | `serve:build` | `yarn serve:build` | Build + serve | localhost:5000 |
 | `test:local` | `yarn test:local` | Build + serve:5002 | localhost:5002 |

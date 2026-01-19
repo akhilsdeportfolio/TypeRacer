@@ -8,7 +8,8 @@
     "start": "webpack-dev-server --mode development",
     "build": "webpack --mode production",
     "build:prod": "NODE_ENV=production webpack --mode production",
-    "build:analyze": "webpack --mode production --profile --json > stats.json",
+    "build:analyze": "ANALYZE=true webpack --mode production",
+    "build:stats": "webpack --mode production --profile --json > stats.json",
     "serve": "firebase serve --only hosting",
     "serve:build": "yarn build && firebase serve --only hosting",
     "deploy": "firebase deploy --only hosting",
@@ -16,7 +17,8 @@
     "preview": "firebase hosting:channel:deploy preview",
     "clean": "rm -rf dist",
     "rebuild": "yarn clean && yarn build",
-    "test:local": "yarn build && firebase serve --only hosting --port 5002"
+    "test:local": "yarn build && firebase serve --only hosting --port 5002",
+    "analyze": "yarn build:analyze"
   },
   "dependencies": {
     "react": "^16.9.0",
@@ -36,6 +38,8 @@
     "ansi-html-community": "^0.0.8",
     "babel-loader": "^8.0.6",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "brotli-webpack-plugin": "^1.1.0",
+    "compression-webpack-plugin": "^11.1.0",
     "css-loader": "^3.2.0",
     "file-loader": "^4.2.0",
     "html-entities": "^2.6.0",
@@ -50,6 +54,7 @@
     "terser-webpack-plugin": "^2.1.0",
     "url-loader": "^2.1.0",
     "webpack": "^4.40.2",
+    "webpack-bundle-analyzer": "^5.1.1",
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.8.1"
   }

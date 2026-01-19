@@ -1,5 +1,5 @@
 # Augment AI PR Review - Automatically reviews PRs
-# Uses official augmentcode/review-pr GitHub Action
+# Uses Augment Code CLI (auggie)
 
 name: 🔍 AI PR Review
 
@@ -10,6 +10,9 @@ on:
 permissions:
   contents: read
   pull-requests: write
+
+env:
+  NODE_VERSION: "22"
 
 jobs:
   ai-review:
@@ -23,9 +26,38 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: 🔍 AI Code Review
-        uses: augmentcode/review-pr@v1
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          augment-session-token: ${{ secrets.AUGMENT_SESSION_TOKEN }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: 🔧 Install Auggie CLI
+        run: npm install -g @augmentcode/auggie
+
+      - name: 🔍 AI Code Review
+        env:
+          AUGMENT_SESSION_AUTH: ${{ secrets.AUGMENT_SESSION_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Get the diff for this PR
+          git fetch origin ${{ github.base_ref }}
+          DIFF=$(git diff origin/${{ github.base_ref }}...HEAD)
+
+          # Run auggie to review the changes
+          REVIEW=$(auggie --print --quiet "Review this code diff and provide constructive feedback on:
+          1. Code quality and best practices
+          2. Potential bugs or issues
+          3. Performance considerations
+          4. Suggestions for improvement
+
+          Here's the diff:
+          $DIFF" 2>&1 || echo "Unable to generate review")
+
+          # Post review as a comment
+          gh pr comment ${{ github.event.pull_request.number }} --body "## 🔍 AI Code Review
+
+          $REVIEW
+
+          ---
+          *Powered by [Augment Code](https://augmentcode.com)*"
 

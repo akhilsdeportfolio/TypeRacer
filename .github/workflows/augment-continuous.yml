@@ -1,5 +1,5 @@
-# Continuous Augment Agent - Runs every hour to improve the codebase
-# Uses official augmentcode/augment-agent GitHub Action
+# Continuous Augment Agent - Runs every 2 hours to improve the codebase
+# Uses Augment Code CLI (auggie)
 
 name: 🤖 Continuous Improvement Agent
 
@@ -17,7 +17,9 @@ on:
 permissions:
   contents: write
   pull-requests: write
-  issues: write
+
+env:
+  NODE_VERSION: "22"
 
 jobs:
   improve-code:
@@ -29,6 +31,15 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: 🔧 Install Auggie CLI
+        run: npm install -g @augmentcode/auggie
 
       - name: 🎲 Select random improvement task
         id: task
@@ -43,26 +54,63 @@ jobs:
             "Add accessibility improvements to a component."
             "Simplify complex conditional logic in any file."
           )
-          
+
           # Pick a random task
           RANDOM_INDEX=$((RANDOM % ${#TASKS[@]}))
           SELECTED_TASK="${TASKS[$RANDOM_INDEX]}"
-          
+
           # Use custom instruction if provided
           if [ -n "${{ github.event.inputs.instruction }}" ]; then
             SELECTED_TASK="${{ github.event.inputs.instruction }}"
           fi
-          
+
           echo "instruction=$SELECTED_TASK" >> $GITHUB_OUTPUT
           echo "Selected task: $SELECTED_TASK"
 
       - name: 🤖 Run Augment Agent
-        uses: augmentcode/augment-agent@v1
+        id: auggie
+        env:
+          AUGMENT_SESSION_AUTH: ${{ secrets.AUGMENT_SESSION_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Running Auggie with: ${{ steps.task.outputs.instruction }}"
+
+          # Run auggie in print mode (non-interactive)
+          auggie --print --quiet "${{ steps.task.outputs.instruction }}" 2>&1 | tee auggie-output.txt || true
+
+          # Check if files were modified
+          if [[ -n $(git status --porcelain) ]]; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "Changes detected!"
+            SUMMARY="Continuous Improvement: $(git diff --stat | tail -1)"
+            echo "summary=$SUMMARY" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "No changes made"
+          fi
+
+      - name: 🔀 Create Pull Request
+        if: steps.auggie.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@v6
         with:
-          instruction: ${{ steps.task.outputs.instruction }}
-          augment-session-token: ${{ secrets.AUGMENT_SESSION_TOKEN }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          create-pull-request: true
-          pull-request-title: "🤖 AI: Continuous Improvement"
-          pull-request-labels: "ai-generated,continuous-improvement"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "🤖 AI: ${{ steps.auggie.outputs.summary }}"
+          title: "🤖 AI: Continuous Improvement"
+          body: |
+            ## 🤖 Continuous Improvement
+
+            **Task:** ${{ steps.task.outputs.instruction }}
+            **Run ID:** ${{ github.run_id }}
+
+            ### Summary
+            ${{ steps.auggie.outputs.summary }}
+
+            ---
+            *Powered by [Augment Code](https://augmentcode.com) CLI.*
+          branch: augment-continuous/${{ github.run_id }}
+          base: main
+          labels: |
+            ai-generated
+            continuous-improvement
+          reviewers: ${{ github.repository_owner }}
 

@@ -55,9 +55,6 @@ jobs:
       - name: 🔧 Install Auggie CLI
         run: npm install -g @augmentcode/auggie
 
-      - name: 📥 Install project dependencies
-        run: yarn install --frozen-lockfile
-
       - name: 🧠 Run Augment Agent
         id: auggie
         env:

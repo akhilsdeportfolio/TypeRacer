@@ -1,0 +1,31 @@
+# Augment AI PR Review - Automatically reviews PRs
+# Uses official augmentcode/review-pr GitHub Action
+
+name: 🔍 AI PR Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  ai-review:
+    runs-on: ubuntu-latest
+    # Don't review AI-generated PRs to avoid infinite loops
+    if: ${{ !contains(github.event.pull_request.labels.*.name, 'ai-generated') }}
+
+    steps:
+      - name: 🛎️ Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🔍 AI Code Review
+        uses: augmentcode/review-pr@v1
+        with:
+          augment-session-token: ${{ secrets.AUGMENT_SESSION_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+

@@ -1,7 +1,8 @@
-# AI Agent - Continuously modifies and improves the codebase
+# Augment AI Agent - Continuously modifies and improves the codebase
+# Uses official Augment Code CLI (auggie)
 # Runs every hour during the day (configurable)
 
-name: 🤖 AI Agent
+name: 🤖 Augment AI Agent
 
 on:
   schedule:
@@ -9,8 +10,13 @@ on:
     - cron: "0 9-18 * * 1-5" # Weekdays only
   workflow_dispatch: # Allow manual triggering
     inputs:
-      task:
-        description: "Specific task for the AI agent"
+      instruction:
+        description: "Custom instruction for the AI agent"
+        required: false
+        default: "Review the codebase and make one small improvement to code quality, tests, or documentation. Focus on a single file."
+        type: string
+      task_type:
+        description: "Type of task to perform"
         required: false
         default: "improve"
         type: choice
@@ -21,17 +27,16 @@ on:
           - fix-bugs
           - add-comments
           - optimize
-          - random
 
 permissions:
   contents: write
   pull-requests: write
 
 env:
-  NODE_VERSION: "18"
+  NODE_VERSION: "22"
 
 jobs:
-  ai-agent:
+  augment-agent:
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
@@ -46,57 +51,93 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "yarn"
 
-      - name: 📥 Install dependencies
+      - name: 🔧 Install Auggie CLI
+        run: npm install -g @augmentcode/auggie
+
+      - name: 📥 Install project dependencies
         run: yarn install --frozen-lockfile
 
-      - name: 🧠 Run AI Agent
-        id: ai-agent
+      - name: 🧠 Run Augment Agent
+        id: auggie
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          AUGMENT_SESSION_AUTH: ${{ secrets.AUGMENT_SESSION_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TASK_TYPE: ${{ github.event.inputs.task || 'random' }}
-        run: node .github/scripts/ai-agent.js
-
-      - name: 📝 Check for changes
-        id: check-changes
         run: |
+          # Build the instruction based on task type
+          TASK_TYPE="${{ github.event.inputs.task_type || 'improve' }}"
+
+          case $TASK_TYPE in
+            improve)
+              INSTRUCTION="Review the codebase and improve code quality, readability, and maintainability. Make a small, focused change to one file."
+              ;;
+            refactor)
+              INSTRUCTION="Find code that could benefit from refactoring. Apply React best practices, extract reusable hooks, or simplify complex logic."
+              ;;
+            add-tests)
+              INSTRUCTION="Find a component or utility that lacks test coverage. Add comprehensive unit tests using Jest and React Testing Library."
+              ;;
+            fix-bugs)
+              INSTRUCTION="Review the codebase for potential bugs like null checks, race conditions, or incorrect state handling. Fix one issue."
+              ;;
+            add-comments)
+              INSTRUCTION="Find code that would benefit from better documentation. Add JSDoc comments, inline explanations, or TODO markers."
+              ;;
+            optimize)
+              INSTRUCTION="Find performance optimization opportunities. Apply memoization, lazy loading, or algorithm improvements."
+              ;;
+            *)
+              INSTRUCTION="${{ github.event.inputs.instruction }}"
+              ;;
+          esac
+
+          echo "Running Auggie with instruction: $INSTRUCTION"
+
+          # Run auggie in print mode (non-interactive)
+          auggie --print --quiet "$INSTRUCTION" 2>&1 | tee auggie-output.txt || true
+
+          # Check if files were modified
           if [[ -n $(git status --porcelain) ]]; then
             echo "has_changes=true" >> $GITHUB_OUTPUT
             echo "Changes detected!"
+
+            # Capture summary
+            SUMMARY="$TASK_TYPE: $(git diff --stat | tail -1)"
+            echo "summary=$SUMMARY" >> $GITHUB_OUTPUT
           else
             echo "has_changes=false" >> $GITHUB_OUTPUT
             echo "No changes made"
           fi
 
       - name: 🔀 Create Pull Request
-        if: steps.check-changes.outputs.has_changes == 'true'
+        if: steps.auggie.outputs.has_changes == 'true'
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "🤖 AI Agent: ${{ steps.ai-agent.outputs.summary }}"
-          title: "🤖 AI Agent: ${{ steps.ai-agent.outputs.summary }}"
+          commit-message: "🤖 Augment Agent: ${{ steps.auggie.outputs.summary }}"
+          title: "🤖 Augment Agent: ${{ github.event.inputs.task_type || 'improve' }}"
           body: |
-            ## 🤖 AI Agent Automated Changes
+            ## 🤖 Augment AI Agent Automated Changes
 
-            **Task Type:** ${{ github.event.inputs.task || 'random' }}
-            **Timestamp:** ${{ github.event.repository.updated_at }}
+            **Task Type:** ${{ github.event.inputs.task_type || 'improve' }}
+            **Run ID:** ${{ github.run_id }}
 
             ### Summary
-            ${{ steps.ai-agent.outputs.summary }}
+            ${{ steps.auggie.outputs.summary }}
 
-            ### Changes Made
-            ${{ steps.ai-agent.outputs.changes }}
+            ### Auggie Output
+            ```
+            $(cat auggie-output.txt 2>/dev/null || echo "No output captured")
+            ```
 
             ---
-            *This PR was automatically created by the AI Agent workflow.*
+            *This PR was automatically created by the Augment AI Agent.*
+            *Powered by [Augment Code](https://augmentcode.com) CLI.*
             *Review carefully before merging.*
-          branch: ai-agent/${{ github.run_id }}
+          branch: augment-agent/${{ github.run_id }}
           base: main
           labels: |
             ai-generated
-            automated
+            augment
           reviewers: ${{ github.repository_owner }}
 

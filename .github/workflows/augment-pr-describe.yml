@@ -1,0 +1,31 @@
+# Augment AI PR Description - Automatically generates PR descriptions
+# Uses official augmentcode/describe-pr GitHub Action
+
+name: 📝 AI PR Description
+
+on:
+  pull_request:
+    types: [opened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  describe-pr:
+    runs-on: ubuntu-latest
+    # Don't describe AI-generated PRs (they already have descriptions)
+    if: ${{ !contains(github.event.pull_request.labels.*.name, 'ai-generated') }}
+
+    steps:
+      - name: 🛎️ Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 📝 Generate PR Description
+        uses: augmentcode/describe-pr@v1
+        with:
+          augment-session-token: ${{ secrets.AUGMENT_SESSION_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+

@@ -1,0 +1,68 @@
+# Continuous Augment Agent - Runs every hour to improve the codebase
+# Uses official augmentcode/augment-agent GitHub Action
+
+name: 🤖 Continuous Improvement Agent
+
+on:
+  schedule:
+    # Run every 2 hours from 8 AM to 8 PM UTC on weekdays
+    - cron: "0 8,10,12,14,16,18,20 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      instruction:
+        description: "Custom instruction for the agent"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  improve-code:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: 🛎️ Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🎲 Select random improvement task
+        id: task
+        run: |
+          TASKS=(
+            "Find a React component that could be improved with better prop handling or hooks usage. Make the improvement."
+            "Add or improve unit tests for an existing component or utility function."
+            "Find code duplication and refactor it into a reusable function or hook."
+            "Add JSDoc comments to functions that are missing documentation."
+            "Find a performance optimization opportunity and implement it."
+            "Improve error handling in an existing component or function."
+            "Add accessibility improvements to a component."
+            "Simplify complex conditional logic in any file."
+          )
+          
+          # Pick a random task
+          RANDOM_INDEX=$((RANDOM % ${#TASKS[@]}))
+          SELECTED_TASK="${TASKS[$RANDOM_INDEX]}"
+          
+          # Use custom instruction if provided
+          if [ -n "${{ github.event.inputs.instruction }}" ]; then
+            SELECTED_TASK="${{ github.event.inputs.instruction }}"
+          fi
+          
+          echo "instruction=$SELECTED_TASK" >> $GITHUB_OUTPUT
+          echo "Selected task: $SELECTED_TASK"
+
+      - name: 🤖 Run Augment Agent
+        uses: augmentcode/augment-agent@v1
+        with:
+          instruction: ${{ steps.task.outputs.instruction }}
+          augment-session-token: ${{ secrets.AUGMENT_SESSION_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          create-pull-request: true
+          pull-request-title: "🤖 AI: Continuous Improvement"
+          pull-request-labels: "ai-generated,continuous-improvement"
+

@@ -1,22 +1,22 @@
 {
   "initialized": "2026-01-19T20:15:00Z",
-  "totalRuns": 10,
+  "totalRuns": 11,
   "successfulRuns": 0,
   "failedRuns": 0,
   "prsCreated": 0,
   "prsMerged": 0,
   "prsClosed": 0,
-  "filesAnalyzed": 1,
+  "filesAnalyzed": 2,
   "issuesCreated": 0,
-  "lastActivity": "2026-01-19T21:09:28.928Z",
+  "lastActivity": "2026-01-19T21:10:36.623Z",
   "agents": {
     "coordinator": {
       "runs": 4,
       "lastRun": "2026-01-19T21:09:28.781Z"
     },
     "analyzer": {
-      "runs": 1,
-      "lastRun": "2026-01-19T20:43:01.308Z"
+      "runs": 2,
+      "lastRun": "2026-01-19T21:10:36.623Z"
     },
     "aiAgent": {
       "runs": 2,

@@ -194,9 +194,15 @@ This opens an interactive visualization showing:
 
 ### **Build Optimizations:**
 - `NODE_ENV=production` set
+- Node.js 18 (no legacy provider needed)
 - Production webpack mode
 - Compression enabled
 - Bundle size reporting
+
+### **Node.js Version Compatibility:**
+- **GitHub Actions:** Node.js 18 (modern crypto, no legacy provider needed)
+- **Local Development:** Node.js 22 (requires `NODE_OPTIONS=--openssl-legacy-provider`)
+- Scripts in `package.json` include `NODE_OPTIONS` for local compatibility
 
 ---
 

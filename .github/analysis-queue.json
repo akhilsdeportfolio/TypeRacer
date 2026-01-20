@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-01-20T13:24:56.813Z",
+  "lastAnalysis": "2026-01-20T13:59:21.884Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -17,7 +17,8 @@
     "src/components/GameResultModal/index.js",
     "src/setupTests.js",
     "src/components/WPMChart/WPMChart.js",
-    "src/pages/SettingsPage.js"
+    "src/pages/SettingsPage.js",
+    "src/pages/FallingWordsPage.js"
   ],
-  "lastFile": "src/types/index.js"
+  "lastFile": "src/pages/FallingWordsPage.js"
 }

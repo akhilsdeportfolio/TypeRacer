@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-01-20T21:12:01.141Z",
+  "lastAnalysis": "2026-01-20T21:40:18.604Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -25,5 +25,5 @@
     "src/pages/CountdownPage.js",
     "src/pages/ZenModePage.js"
   ],
-  "lastFile": "src/__integration__/TypeRacer.integration.test.js"
+  "lastFile": "src/components/WPMChart/WPMChart.js"
 }

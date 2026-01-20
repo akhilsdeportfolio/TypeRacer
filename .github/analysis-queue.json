@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-01-20T21:40:18.604Z",
+  "lastAnalysis": "2026-01-20T22:12:16.015Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -23,7 +23,8 @@
     "src/pages/CustomPracticePage.js",
     "src/services/analytics.js",
     "src/pages/CountdownPage.js",
-    "src/pages/ZenModePage.js"
+    "src/pages/ZenModePage.js",
+    "src/pages/CodeTypingPage.js"
   ],
-  "lastFile": "src/components/WPMChart/WPMChart.js"
+  "lastFile": "src/pages/CodeTypingPage.js"
 }

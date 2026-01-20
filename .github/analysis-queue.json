@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-01-20T10:16:26.441Z",
+  "lastAnalysis": "2026-01-20T10:51:16.358Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -16,7 +16,8 @@
     "src/__integration__/TypeRacer.integration.test.js",
     "src/components/GameResultModal/index.js",
     "src/setupTests.js",
-    "src/components/WPMChart/WPMChart.js"
+    "src/components/WPMChart/WPMChart.js",
+    "src/pages/SettingsPage.js"
   ],
-  "lastFile": "src/components/WPMChart/WPMChart.js"
+  "lastFile": "src/pages/SettingsPage.js"
 }

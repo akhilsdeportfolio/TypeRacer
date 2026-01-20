@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-01-20T00:52:16.556Z",
+  "lastAnalysis": "2026-01-20T02:54:50.852Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -9,7 +9,8 @@
     "src/pages/index.js",
     "src/pages/SettingsPage.css",
     "src/pages/GamePage.css",
-    "src/pages/QuoteTypingPage.js"
+    "src/pages/QuoteTypingPage.js",
+    "src/types/index.js"
   ],
-  "lastFile": "src/pages/QuoteTypingPage.js"
+  "lastFile": "src/types/index.js"
 }

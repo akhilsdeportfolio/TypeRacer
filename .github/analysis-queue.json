@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-01-20T22:41:12.623Z",
+  "lastAnalysis": "2026-01-20T23:11:07.760Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -25,7 +25,8 @@
     "src/pages/CountdownPage.js",
     "src/pages/ZenModePage.js",
     "src/pages/CodeTypingPage.js",
-    "src/__integration__/GameArea.integration.test.js"
+    "src/__integration__/GameArea.integration.test.js",
+    "src/__integration__/TimerGameState.integration.test.js"
   ],
-  "lastFile": "src/__integration__/GameArea.integration.test.js"
+  "lastFile": "src/__integration__/TimerGameState.integration.test.js"
 }

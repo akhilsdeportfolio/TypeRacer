@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-01-20T22:12:16.015Z",
+  "lastAnalysis": "2026-01-20T22:41:12.623Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -24,7 +24,8 @@
     "src/services/analytics.js",
     "src/pages/CountdownPage.js",
     "src/pages/ZenModePage.js",
-    "src/pages/CodeTypingPage.js"
+    "src/pages/CodeTypingPage.js",
+    "src/__integration__/GameArea.integration.test.js"
   ],
-  "lastFile": "src/pages/CodeTypingPage.js"
+  "lastFile": "src/__integration__/GameArea.integration.test.js"
 }

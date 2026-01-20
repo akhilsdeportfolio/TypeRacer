@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-01-20T19:38:06.335Z",
+  "lastAnalysis": "2026-01-20T20:37:29.001Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -22,7 +22,8 @@
     "src/pages/HomePage.js",
     "src/pages/CustomPracticePage.js",
     "src/services/analytics.js",
-    "src/pages/CountdownPage.js"
+    "src/pages/CountdownPage.js",
+    "src/pages/ZenModePage.js"
   ],
-  "lastFile": "src/pages/CountdownPage.js"
+  "lastFile": "src/pages/ZenModePage.js"
 }

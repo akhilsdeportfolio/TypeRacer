@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-01-21T19:05:38.710Z",
+  "lastAnalysis": "2026-01-21T19:47:18.818Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -34,7 +34,8 @@
     "src/components/GameResultModal/GameResultModal.js",
     "src/pages/StatsPage.css",
     "src/components/TypeRacerRefactored.css",
-    "src/utils/calculations.js"
+    "src/utils/calculations.js",
+    "src/components/ErrorBoundary/index.js"
   ],
-  "lastFile": "src/utils/calculations.js"
+  "lastFile": "src/components/ErrorBoundary/index.js"
 }

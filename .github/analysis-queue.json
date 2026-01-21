@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-01-21T02:53:53.949Z",
+  "lastAnalysis": "2026-01-21T04:01:09.578Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -28,7 +28,8 @@
     "src/__integration__/GameArea.integration.test.js",
     "src/__integration__/TimerGameState.integration.test.js",
     "src/pages/BotRacePage.js",
-    "src/pages/SpeedChallengePage.js"
+    "src/pages/SpeedChallengePage.js",
+    "src/pages/LessonsPage.js"
   ],
-  "lastFile": "src/pages/BotRacePage.js"
+  "lastFile": "src/pages/LessonsPage.js"
 }

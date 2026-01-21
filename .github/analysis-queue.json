@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-01-21T20:19:31.925Z",
+  "lastAnalysis": "2026-01-21T21:18:59.748Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -35,7 +35,8 @@
     "src/pages/StatsPage.css",
     "src/components/TypeRacerRefactored.css",
     "src/utils/calculations.js",
-    "src/components/ErrorBoundary/index.js"
+    "src/components/ErrorBoundary/index.js",
+    "src/pages/MemoryTypingPage.js"
   ],
-  "lastFile": "src/pages/WordScramblePage.js"
+  "lastFile": "src/pages/MemoryTypingPage.js"
 }

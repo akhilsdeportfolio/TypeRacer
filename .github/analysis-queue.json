@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-01-21T05:52:14.312Z",
+  "lastAnalysis": "2026-01-21T06:19:56.653Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -30,7 +30,8 @@
     "src/pages/BotRacePage.js",
     "src/pages/SpeedChallengePage.js",
     "src/pages/LessonsPage.js",
-    "src/pages/ProfilePage.js"
+    "src/pages/ProfilePage.js",
+    "src/components/GameResultModal/GameResultModal.js"
   ],
-  "lastFile": "src/pages/FallingWordsPage.css"
+  "lastFile": "src/components/GameResultModal/GameResultModal.js"
 }

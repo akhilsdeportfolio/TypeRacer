@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-01-22T08:17:03.823Z",
+  "lastAnalysis": "2026-01-22T08:54:51.191Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -42,7 +42,8 @@
     "src/pages/AchievementsPage.js",
     "src/services/index.js",
     "src/pages/MultiplayerPage.js",
-    "src/pages/ProfilePage.css"
+    "src/pages/ProfilePage.css",
+    "src/components/GameResultModal/GameResultModal.css"
   ],
-  "lastFile": "src/pages/MemoryTypingPage.js"
+  "lastFile": "src/components/GameResultModal/GameResultModal.css"
 }

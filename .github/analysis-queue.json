@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-01-23T08:15:55.462Z",
+  "lastAnalysis": "2026-01-23T08:51:09.075Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -46,7 +46,8 @@
     "src/components/GameResultModal/GameResultModal.css",
     "src/utils/__tests__/calculations.test.js",
     "src/services/storage.js",
-    "src/utils/audio.js"
+    "src/utils/audio.js",
+    "src/components/WPMChart/WPMChart.css"
   ],
-  "lastFile": "src/utils/calculations.js"
+  "lastFile": "src/components/WPMChart/WPMChart.css"
 }

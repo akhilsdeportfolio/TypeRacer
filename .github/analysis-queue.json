@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-01-23T07:18:39.641Z",
+  "lastAnalysis": "2026-01-23T07:43:48.582Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -48,5 +48,5 @@
     "src/services/storage.js",
     "src/utils/audio.js"
   ],
-  "lastFile": "src/pages/SettingsPage.js"
+  "lastFile": "src/components/WPMChart/WPMChart.js"
 }

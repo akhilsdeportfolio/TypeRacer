@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-01-23T15:45:54.148Z",
+  "lastAnalysis": "2026-01-23T16:16:04.549Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -50,5 +50,5 @@
     "src/components/WPMChart/WPMChart.css",
     "src/__integration__/GameState.integration.test.js"
   ],
-  "lastFile": "src/pages/StatsPage.css"
+  "lastFile": "src/__integration__/GameState.integration.test.js"
 }

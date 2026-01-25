@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-01-24T23:37:48.819Z",
+  "lastAnalysis": "2026-01-25T00:58:42.570Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -51,5 +51,5 @@
     "src/__integration__/GameState.integration.test.js",
     "src/router/index.js"
   ],
-  "lastFile": "src/pages/WordScramblePage.js"
+  "lastFile": "src/utils/audio.js"
 }

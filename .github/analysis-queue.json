@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-01-25T10:43:29.936Z",
+  "lastAnalysis": "2026-01-25T11:08:59.927Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -51,5 +51,5 @@
     "src/__integration__/GameState.integration.test.js",
     "src/router/index.js"
   ],
-  "lastFile": "src/pages/DailyChallengePage.js"
+  "lastFile": "src/setupTests.js"
 }

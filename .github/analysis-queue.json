@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-01-27T06:19:37.430Z",
+  "lastAnalysis": "2026-01-27T06:57:36.832Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -50,7 +50,8 @@
     "src/components/WPMChart/WPMChart.css",
     "src/__integration__/GameState.integration.test.js",
     "src/router/index.js",
-    "src/components/WPMChart/index.js"
+    "src/components/WPMChart/index.js",
+    "src/components/ErrorBoundary/FeatureErrorBoundary.js"
   ],
-  "lastFile": "src/components/GameResultModal/index.js"
+  "lastFile": "src/components/ErrorBoundary/FeatureErrorBoundary.js"
 }

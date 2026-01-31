@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-01-31T13:13:37.212Z",
+  "lastAnalysis": "2026-01-31T13:54:43.748Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -53,5 +53,5 @@
     "src/components/WPMChart/index.js",
     "src/components/ErrorBoundary/FeatureErrorBoundary.js"
   ],
-  "lastFile": "src/__integration__/GameArea.integration.test.js"
+  "lastFile": "src/pages/LessonsPage.js"
 }

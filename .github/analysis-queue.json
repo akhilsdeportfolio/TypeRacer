@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-02-01T16:51:50.294Z",
+  "lastAnalysis": "2026-02-01T17:15:39.929Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -53,5 +53,5 @@
     "src/components/WPMChart/index.js",
     "src/components/ErrorBoundary/FeatureErrorBoundary.js"
   ],
-  "lastFile": "src/pages/SettingsPage.js"
+  "lastFile": "src/components/WPMChart/WPMChart.css"
 }

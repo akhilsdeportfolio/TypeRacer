@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-02-12T19:43:18.291Z",
+  "lastAnalysis": "2026-02-12T20:22:03.373Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -54,7 +54,8 @@
     "src/components/ErrorBoundary/FeatureErrorBoundary.js",
     "src/components/atoms/Character/Character.css",
     "src/components/VirtualKeyboard/VirtualKeyboard.js",
-    "src/components/AchievementBadge/AchievementBadge.js"
+    "src/components/AchievementBadge/AchievementBadge.js",
+    "src/components/organisms/AchievementsPanel/index.js"
   ],
-  "lastFile": "src/components/AchievementBadge/AchievementBadge.js"
+  "lastFile": "src/components/organisms/AchievementsPanel/index.js"
 }

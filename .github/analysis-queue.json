@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-02-13T07:41:34.483Z",
+  "lastAnalysis": "2026-02-13T08:30:03.027Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -67,7 +67,8 @@
     "src/components/Toast/Toast.js",
     "src/components/Toast/index.js",
     "src/components/Leaderboard/Leaderboard.css",
-    "src/components/TimerDisplay/index.js"
+    "src/components/TimerDisplay/index.js",
+    "src/components/KeyboardHeatmap/KeyboardHeatmap.js"
   ],
-  "lastFile": "src/components/TimerDisplay/index.js"
+  "lastFile": "src/components/KeyboardHeatmap/KeyboardHeatmap.js"
 }

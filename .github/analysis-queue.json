@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-02-13T23:25:34.382Z",
+  "lastAnalysis": "2026-02-13T23:50:08.779Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -76,7 +76,8 @@
     "src/components/StreakCounter/StreakCounter.js",
     "src/components/Toast/Toast.css",
     "src/components/VirtualKeyboard/index.js",
-    "src/components/AchievementBadge/AchievementBadge.css"
+    "src/components/AchievementBadge/AchievementBadge.css",
+    "src/components/atoms/index.js"
   ],
-  "lastFile": "src/components/KeyboardHeatmap/KeyboardHeatmap.js"
+  "lastFile": "src/components/atoms/index.js"
 }

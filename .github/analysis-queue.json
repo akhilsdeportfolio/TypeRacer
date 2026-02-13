@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-02-13T20:28:30.372Z",
+  "lastAnalysis": "2026-02-13T21:03:00.123Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -73,7 +73,8 @@
     "src/components/organisms/GameArea/index.js",
     "src/components/TypingHistory/TypingHistory.js",
     "src/components/atoms/Text/Text.js",
-    "src/components/StreakCounter/StreakCounter.js"
+    "src/components/StreakCounter/StreakCounter.js",
+    "src/components/Toast/Toast.css"
   ],
-  "lastFile": "src/components/Toast/index.js"
+  "lastFile": "src/components/Toast/Toast.css"
 }

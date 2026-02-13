@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-02-13T05:17:54.794Z",
+  "lastAnalysis": "2026-02-13T06:32:39.831Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -65,7 +65,8 @@
     "src/components/TypingHistory/TypingHistory.css",
     "src/components/atoms/Text/index.js",
     "src/components/Toast/Toast.js",
-    "src/components/Toast/index.js"
+    "src/components/Toast/index.js",
+    "src/components/Leaderboard/Leaderboard.css"
   ],
-  "lastFile": "src/components/Toast/index.js"
+  "lastFile": "src/components/Leaderboard/Leaderboard.css"
 }

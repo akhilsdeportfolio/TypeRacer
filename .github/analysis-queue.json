@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-02-14T01:02:18.166Z",
+  "lastAnalysis": "2026-02-14T03:38:48.499Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -78,7 +78,8 @@
     "src/components/VirtualKeyboard/index.js",
     "src/components/AchievementBadge/AchievementBadge.css",
     "src/components/atoms/index.js",
-    "src/components/StreakCounter/index.js"
+    "src/components/StreakCounter/index.js",
+    "src/components/organisms/Leaderboard/Leaderboard.css"
   ],
-  "lastFile": "src/components/StreakCounter/index.js"
+  "lastFile": "src/components/organisms/Leaderboard/Leaderboard.css"
 }

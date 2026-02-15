@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-02-15T07:10:27.685Z",
+  "lastAnalysis": "2026-02-15T07:53:04.013Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -88,7 +88,8 @@
     "src/components/StreakCounter/StreakCounter.css",
     "src/components/organisms/AchievementsPanel/AchievementsPanel.css",
     "src/components/ErrorBoundary.js",
-    "src/components/TimerDisplay/TimerDisplay.css"
+    "src/components/TimerDisplay/TimerDisplay.css",
+    "src/components/organisms/GameModeSelector/GameModeSelector.css"
   ],
-  "lastFile": "src/components/atoms/Text/Text.css"
+  "lastFile": "src/components/organisms/GameModeSelector/GameModeSelector.css"
 }

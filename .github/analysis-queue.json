@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-02-18T15:39:56.628Z",
+  "lastAnalysis": "2026-02-18T16:49:15.113Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -100,5 +100,5 @@
     "src/components/atoms/Button/index.js",
     "src/components/organisms/GameModeSelector/GameModeSelector.js"
   ],
-  "lastFile": "src/components/Leaderboard/Leaderboard.js"
+  "lastFile": "src/components/atoms/Text/Text.css"
 }

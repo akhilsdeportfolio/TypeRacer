@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-02-21T23:42:40.265Z",
+  "lastAnalysis": "2026-02-22T01:05:06.832Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -100,5 +100,5 @@
     "src/components/atoms/Button/index.js",
     "src/components/organisms/GameModeSelector/GameModeSelector.js"
   ],
-  "lastFile": "src/__integration__/GameState.integration.test.js"
+  "lastFile": "src/components/GameResultModal/index.js"
 }

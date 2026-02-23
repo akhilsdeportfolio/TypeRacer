@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-02-23T03:58:07.714Z",
+  "lastAnalysis": "2026-02-23T05:23:35.843Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -100,5 +100,5 @@
     "src/components/atoms/Button/index.js",
     "src/components/organisms/GameModeSelector/GameModeSelector.js"
   ],
-  "lastFile": "src/pages/MemoryTypingPage.js"
+  "lastFile": "src/components/ErrorBoundary/FeatureErrorBoundary.js"
 }

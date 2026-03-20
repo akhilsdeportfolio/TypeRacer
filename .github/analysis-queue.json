@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-03-20T07:27:01.730Z",
+  "lastAnalysis": "2026-03-20T07:59:55.544Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -103,5 +103,5 @@
     "src/components/atoms/Character/index.js",
     "src/components/VirtualKeyboard/VirtualKeyboard.css"
   ],
-  "lastFile": "src/components/TypingHistory/index.js"
+  "lastFile": "src/components/TypingHistory/TypingHistory.js"
 }

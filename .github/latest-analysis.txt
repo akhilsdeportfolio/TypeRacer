@@ -1,2 +1,5 @@
-❌ CLI non-interactive mode access has been disabled for your account. If you believe this to be an error, please contact your administrator.
+
+❌ Authentication failed: HTTP error: 401 Unauthorized
+   Run 'auggie login' to authenticate first.
+   ⎿ Request ID: cb7a9350-27da-4f08-87eb-aa490a9afdff
 {}

@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-03-27T08:37:47.244Z",
+  "lastAnalysis": "2026-03-27T09:42:28.179Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -105,7 +105,8 @@
     "src/context/ThemeContext.js",
     "src/context/SettingsContext.js",
     "src/components/molecules/WPMGraph/index.js",
-    "src/components/molecules/AchievementNotification/AchievementNotification.css"
+    "src/components/molecules/AchievementNotification/AchievementNotification.css",
+    "src/context/GameContext.js"
   ],
-  "lastFile": "src/components/atoms/Character/Character.js"
+  "lastFile": "src/context/GameContext.js"
 }

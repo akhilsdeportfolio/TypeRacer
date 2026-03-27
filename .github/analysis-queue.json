@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-03-27T04:07:55.709Z",
+  "lastAnalysis": "2026-03-27T05:54:10.350Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -103,7 +103,8 @@
     "src/components/atoms/Character/index.js",
     "src/components/VirtualKeyboard/VirtualKeyboard.css",
     "src/context/ThemeContext.js",
-    "src/context/SettingsContext.js"
+    "src/context/SettingsContext.js",
+    "src/components/molecules/WPMGraph/index.js"
   ],
-  "lastFile": "src/components/atoms/Button/Button.css"
+  "lastFile": "src/components/molecules/WPMGraph/index.js"
 }

@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-03-27T22:56:58.579Z",
+  "lastAnalysis": "2026-03-27T23:25:54.180Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -115,5 +115,5 @@
     "src/components/molecules/AchievementNotification/index.js",
     "src/components/molecules/WPMGraph/WPMGraph.js"
   ],
-  "lastFile": "src/context/GameContext.js"
+  "lastFile": "src/components/molecules/AchievementNotification/AchievementNotification.js"
 }

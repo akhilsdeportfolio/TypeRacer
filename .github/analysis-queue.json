@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-03-27T14:02:23.417Z",
+  "lastAnalysis": "2026-03-27T15:12:38.983Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -108,7 +108,8 @@
     "src/components/molecules/AchievementNotification/AchievementNotification.css",
     "src/context/GameContext.js",
     "src/components/molecules/StatCard/__tests__/StatCard.test.js",
-    "src/components/molecules/StatCard/StatCard.css"
+    "src/components/molecules/StatCard/StatCard.css",
+    "src/components/molecules/StatCard/StatCard.js"
   ],
-  "lastFile": "src/components/molecules/StatCard/StatCard.css"
+  "lastFile": "src/components/molecules/StatCard/StatCard.js"
 }

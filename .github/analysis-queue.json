@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-03-28T08:36:31.101Z",
+  "lastAnalysis": "2026-03-28T09:25:41.494Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -113,7 +113,8 @@
     "src/context/index.js",
     "src/components/molecules/AchievementNotification/AchievementNotification.js",
     "src/components/molecules/AchievementNotification/index.js",
-    "src/components/molecules/WPMGraph/WPMGraph.js"
+    "src/components/molecules/WPMGraph/WPMGraph.js",
+    "src/components/molecules/ProgressBar/ProgressBar.js"
   ],
-  "lastFile": "src/components/molecules/StatCard/StatCard.js"
+  "lastFile": "src/components/molecules/ProgressBar/ProgressBar.js"
 }

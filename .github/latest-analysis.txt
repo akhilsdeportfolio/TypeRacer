@@ -1,5 +1,7 @@
+Warning: Could not fetch tenant MCP server configurations: HTTP error: 401 Unauthorized
+Warning: Could not fetch user MCP server configurations: HTTP error: 401 Unauthorized
 
 ❌ Authentication failed: HTTP error: 401 Unauthorized
    Run 'auggie login' to authenticate first.
-   ⎿ Request ID: 7caf783c-52bd-4b2c-a627-e4fc9da868e3
+   ⎿ Request ID: 06c2d572-a55d-4e5f-9582-9c80a3270bc2
 {}

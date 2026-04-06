@@ -1,7 +1,8 @@
 Warning: Could not fetch tenant MCP server configurations: HTTP error: 401 Unauthorized
 Warning: Could not fetch user MCP server configurations: HTTP error: 401 Unauthorized
+API Error: "unavailable: HTTP error: 502 Bad Gateway" Retrying in 0 seconds.
 
 ❌ Authentication failed: HTTP error: 401 Unauthorized
    Run 'auggie login' to authenticate first.
-   ⎿ Request ID: 10681263-3027-44e8-a21f-0ef69486cc01
+   ⎿ Request ID: d38b1cdc-d486-4356-82ed-8c4b0a87ba87
 {}

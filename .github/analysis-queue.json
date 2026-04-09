@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-04-09T10:37:25.850Z",
+  "lastAnalysis": "2026-04-09T11:43:02.980Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -124,5 +124,5 @@
     "src/components/molecules/WPMGraph/WPMGraph.css",
     "src/components/molecules/ProgressBar/index.js"
   ],
-  "lastFile": "src/components/molecules/WPMGraph/WPMGraph.js"
+  "lastFile": "src/components/ErrorBoundary/FeatureErrorBoundary.js"
 }

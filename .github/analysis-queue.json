@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-04-10T14:08:38.914Z",
+  "lastAnalysis": "2026-04-10T15:11:06.225Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -124,7 +124,8 @@
     "src/components/molecules/WPMGraph/WPMGraph.css",
     "src/components/molecules/ProgressBar/index.js",
     "src/layouts/MainLayout.css",
-    "src/features/featureFlags.js"
+    "src/features/featureFlags.js",
+    "src/components/LazyComponents.js"
   ],
-  "lastFile": "src/components/Leaderboard/Leaderboard.css"
+  "lastFile": "src/components/LazyComponents.js"
 }

@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-04-11T19:08:52.136Z",
+  "lastAnalysis": "2026-04-11T19:53:32.001Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -126,7 +126,8 @@
     "src/layouts/MainLayout.css",
     "src/features/featureFlags.js",
     "src/components/LazyComponents.js",
-    "src/layouts/MainLayout.js"
+    "src/layouts/MainLayout.js",
+    "src/features/index.js"
   ],
-  "lastFile": "src/components/organisms/AchievementsPanel/index.js"
+  "lastFile": "src/features/index.js"
 }

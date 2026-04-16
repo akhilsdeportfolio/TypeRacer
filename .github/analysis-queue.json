@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-04-16T13:00:09.807Z",
+  "lastAnalysis": "2026-04-16T14:57:04.222Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -129,5 +129,5 @@
     "src/layouts/MainLayout.js",
     "src/features/index.js"
   ],
-  "lastFile": "src/layouts/MainLayout.js"
+  "lastFile": "src/utils/__tests__/calculations.test.js"
 }

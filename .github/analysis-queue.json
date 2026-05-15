@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-05-15T21:31:47.537Z",
+  "lastAnalysis": "2026-05-15T22:42:18.229Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -129,5 +129,5 @@
     "src/layouts/MainLayout.js",
     "src/features/index.js"
   ],
-  "lastFile": "src/components/organisms/GameModeSelector/GameModeSelector.css"
+  "lastFile": "src/components/molecules/ProgressBar/__tests__/ProgressBar.test.js"
 }

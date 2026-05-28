@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-05-28T09:40:36.335Z",
+  "lastAnalysis": "2026-05-28T12:59:34.634Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -127,7 +127,8 @@
     "src/features/featureFlags.js",
     "src/components/LazyComponents.js",
     "src/layouts/MainLayout.js",
-    "src/features/index.js"
+    "src/features/index.js",
+    "src/__mocks__/fileMock.js"
   ],
-  "lastFile": "src/types/index.js"
+  "lastFile": "src/__mocks__/fileMock.js"
 }

@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-05-29T05:48:07.827Z",
+  "lastAnalysis": "2026-05-29T09:30:01.105Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -129,7 +129,8 @@
     "src/layouts/MainLayout.js",
     "src/features/index.js",
     "src/__mocks__/fileMock.js",
-    "src/hooks/__tests__/useLocalStorage.test.js"
+    "src/hooks/__tests__/useLocalStorage.test.js",
+    "src/hooks/index.js"
   ],
-  "lastFile": "src/pages/FallingWordsPage.js"
+  "lastFile": "src/hooks/index.js"
 }

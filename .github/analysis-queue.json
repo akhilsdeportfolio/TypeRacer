@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-05-29T16:32:50.863Z",
+  "lastAnalysis": "2026-05-29T19:24:44.071Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -130,7 +130,8 @@
     "src/features/index.js",
     "src/__mocks__/fileMock.js",
     "src/hooks/__tests__/useLocalStorage.test.js",
-    "src/hooks/index.js"
+    "src/hooks/index.js",
+    "src/hooks/useGameState.js"
   ],
-  "lastFile": "src/pages/QuoteTypingPage.js"
+  "lastFile": "src/hooks/useGameState.js"
 }

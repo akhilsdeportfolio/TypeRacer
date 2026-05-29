@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-05-28T23:05:39.937Z",
+  "lastAnalysis": "2026-05-29T01:29:31.151Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -128,7 +128,8 @@
     "src/components/LazyComponents.js",
     "src/layouts/MainLayout.js",
     "src/features/index.js",
-    "src/__mocks__/fileMock.js"
+    "src/__mocks__/fileMock.js",
+    "src/hooks/__tests__/useLocalStorage.test.js"
   ],
-  "lastFile": "src/pages/DailyChallengePage.js"
+  "lastFile": "src/hooks/__tests__/useLocalStorage.test.js"
 }

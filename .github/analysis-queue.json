@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-06-04T00:09:59.820Z",
+  "lastAnalysis": "2026-06-04T05:16:11.034Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -138,5 +138,5 @@
     "src/styles/global.css",
     "src/hooks/useTypeRacer.js"
   ],
-  "lastFile": "src/styles/global.css"
+  "lastFile": "src/__integration__/TimerGameState.integration.test.js"
 }

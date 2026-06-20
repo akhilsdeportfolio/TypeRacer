@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-06-20T16:57:50.087Z",
+  "lastAnalysis": "2026-06-20T18:07:05.978Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -137,7 +137,8 @@
     "src/hooks/useKeyboardShortcuts.js",
     "src/styles/global.css",
     "src/hooks/useTypeRacer.js",
-    "src/bloat/largeData.js"
+    "src/bloat/largeData.js",
+    "src/bloat/heavyImports.js"
   ],
-  "lastFile": "src/components/molecules/AchievementNotification/AchievementNotification.css"
+  "lastFile": "src/bloat/heavyImports.js"
 }

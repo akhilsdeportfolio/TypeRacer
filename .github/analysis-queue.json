@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-06-25T09:51:12.544Z",
+  "lastAnalysis": "2026-06-25T12:10:16.801Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -138,7 +138,8 @@
     "src/styles/global.css",
     "src/hooks/useTypeRacer.js",
     "src/bloat/largeData.js",
-    "src/bloat/heavyImports.js"
+    "src/bloat/heavyImports.js",
+    "src/bloat/index.js"
   ],
-  "lastFile": "src/components/VirtualKeyboard/VirtualKeyboard.css"
+  "lastFile": "src/bloat/index.js"
 }

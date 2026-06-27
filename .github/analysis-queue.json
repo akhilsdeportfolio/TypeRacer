@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-06-27T21:34:48.352Z",
+  "lastAnalysis": "2026-06-27T22:51:15.716Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -141,5 +141,5 @@
     "src/bloat/heavyImports.js",
     "src/bloat/index.js"
   ],
-  "lastFile": "src/components/molecules/AchievementNotification/AchievementNotification.css"
+  "lastFile": "src/__mocks__/fileMock.js"
 }

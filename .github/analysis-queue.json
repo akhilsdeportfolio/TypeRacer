@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-07-11T09:03:18.615Z",
+  "lastAnalysis": "2026-07-11T10:38:09.598Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -141,5 +141,5 @@
     "src/bloat/heavyImports.js",
     "src/bloat/index.js"
   ],
-  "lastFile": "src/__mocks__/fileMock.js"
+  "lastFile": "src/components/molecules/StatCard/StatCard.js"
 }

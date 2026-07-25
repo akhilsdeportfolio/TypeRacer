@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-07-24T23:53:10.283Z",
+  "lastAnalysis": "2026-07-25T01:24:50.121Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -142,5 +142,5 @@
     "src/bloat/index.js",
     "src/hooks/useTimer.js"
   ],
-  "lastFile": "src/components/organisms/AchievementsPanel/AchievementsPanel.css"
+  "lastFile": "src/hooks/useGameState.js"
 }

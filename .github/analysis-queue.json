@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-07-28T10:05:15.389Z",
+  "lastAnalysis": "2026-07-28T12:18:02.648Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -142,7 +142,8 @@
     "src/bloat/index.js",
     "src/hooks/useTimer.js",
     "src/hooks/useLocalStorage.js",
-    "src/hooks/usePerformance.js"
+    "src/hooks/usePerformance.js",
+    "src/hooks/useWPMTracking.js"
   ],
-  "lastFile": "src/__integration__/TypeRacer.integration.test.js"
+  "lastFile": "src/hooks/useWPMTracking.js"
 }

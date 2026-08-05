@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-08-05T12:21:17.322Z",
+  "lastAnalysis": "2026-08-05T14:42:01.527Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -147,5 +147,5 @@
     "src/hooks/useSound.js",
     "src/hooks/useAchievements.js"
   ],
-  "lastFile": "src/constants/index.js"
+  "lastFile": "src/components/organisms/AchievementsPanel/AchievementsPanel.js"
 }

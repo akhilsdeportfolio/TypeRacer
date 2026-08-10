@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-08-10T21:07:42.118Z",
+  "lastAnalysis": "2026-08-10T22:03:25.311Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -147,5 +147,5 @@
     "src/hooks/useSound.js",
     "src/hooks/useAchievements.js"
   ],
-  "lastFile": "src/services/storage.js"
+  "lastFile": "src/__mocks__/fileMock.js"
 }

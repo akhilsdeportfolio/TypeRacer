@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-08-20T12:21:09.999Z",
+  "lastAnalysis": "2026-08-20T13:23:48.108Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -150,5 +150,5 @@
     "src/data/wordLists.js",
     "src/data/index.js"
   ],
-  "lastFile": "src/hooks/useTypeRacer.js"
+  "lastFile": "src/services/storage.js"
 }

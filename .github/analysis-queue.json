@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-08-30T16:50:35.178Z",
+  "lastAnalysis": "2026-08-30T19:32:42.467Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -150,5 +150,5 @@
     "src/data/wordLists.js",
     "src/data/index.js"
   ],
-  "lastFile": "src/hooks/__tests__/useLocalStorage.test.js"
+  "lastFile": "src/context/ThemeContext.js"
 }

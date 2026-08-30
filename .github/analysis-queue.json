@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-08-30T01:23:51.865Z",
+  "lastAnalysis": "2026-08-30T06:52:37.975Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -150,5 +150,5 @@
     "src/data/wordLists.js",
     "src/data/index.js"
   ],
-  "lastFile": "src/styles/global.css"
+  "lastFile": "src/hooks/useWPMTracking.js"
 }

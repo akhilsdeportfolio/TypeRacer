@@ -1,7 +1,8 @@
 Warning: Could not fetch tenant MCP server configurations: HTTP error: 401 Unauthorized
 Warning: Could not fetch user MCP server configurations: HTTP error: 401 Unauthorized
+Augment service is temporarily unavailable (HTTP 502). Retrying in 1s…
 
 ❌ Authentication failed: HTTP error: 401 Unauthorized
    Run 'auggie login' to authenticate first.
-   ⎿ Request ID: ef7c57b6-d9bd-4d35-a086-aed6147ac070
+   ⎿ Request ID: a80da243-d471-466e-b40a-7d8e4ab68d8c
 {}

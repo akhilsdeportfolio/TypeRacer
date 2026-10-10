@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-10-10T02:28:13.678Z",
+  "lastAnalysis": "2026-10-10T08:46:10.179Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -150,5 +150,5 @@
     "src/data/wordLists.js",
     "src/data/index.js"
   ],
-  "lastFile": "src/components/molecules/ProgressBar/ProgressBar.css"
+  "lastFile": "src/components/molecules/ProgressBar/__tests__/ProgressBar.test.js"
 }

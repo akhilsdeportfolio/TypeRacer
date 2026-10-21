@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-10-21T05:03:42.585Z",
+  "lastAnalysis": "2026-10-21T10:22:06.726Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -150,5 +150,5 @@
     "src/data/wordLists.js",
     "src/data/index.js"
   ],
-  "lastFile": "src/components/KeyboardHeatmap/KeyboardHeatmap.css"
+  "lastFile": "src/components/WPMChart/WPMChart.js"
 }

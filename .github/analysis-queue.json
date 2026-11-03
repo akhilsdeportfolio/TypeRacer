@@ -1,6 +1,6 @@
 {
   "tasks": [],
-  "lastAnalysis": "2026-11-03T11:06:57.360Z",
+  "lastAnalysis": "2026-11-03T18:30:34.650Z",
   "analyzedFiles": [
     "src/utils/index.js",
     "src/pages/TypeRacerPage.js",
@@ -150,5 +150,5 @@
     "src/data/wordLists.js",
     "src/data/index.js"
   ],
-  "lastFile": "src/components/atoms/Button/__tests__/Button.test.js"
+  "lastFile": "src/components/TypingHistory/index.js"
 }

@@ -1,3 +1,7 @@
-Error: Failed to fetch feature flags: API call failed: 401 Unauthorized: Invalid token
-Error: Unknown option: --quiet
+Warning: Could not fetch tenant MCP server configurations: HTTP error: 401 Unauthorized
+Warning: Could not fetch user MCP server configurations: HTTP error: 401 Unauthorized
+
+❌ Authentication failed: HTTP error: 401 Unauthorized
+   Run 'auggie login' to authenticate first.
+   ⎿ Request ID: 66caedda-b024-4d86-931a-88416e52c173
 {}
